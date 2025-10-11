@@ -5,19 +5,9 @@
 }
 
 body {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/Ev2-react/src/Imagenes/dcComics.jpg') no-repeat center center fixed;
     background-size: cover;
 }
-
-.text-shadow {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.shadow {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
-  font-size: 20px;
-}
-
 
 .navbar {
 background: linear-gradient(to bottom, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 0.6), transparent);
@@ -43,9 +33,8 @@ background: linear-gradient(to bottom, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 0
     background-color: #ceb457;
     color: #e4f2ff;
 }
-
 footer, footer p{
-    background: linear-gradient(to top, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 0.6), transparent);
+    background: linear-gradient(to top, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 1.0), transparent);
     color: #fcd034;
 }
 
@@ -141,25 +130,25 @@ footer, footer p{
 }
 
 .card1 { /* Nosotros */
-    background-image: url('/public/Imagenes/hero-nosotros.jpg');
+    background-image: url('/Ev2-react/src/Imagenes/hero-nosotros.jpg');
     background-size: cover;
     background-position: center;
 }
 
 .card2 { /* Nuestros productos */
-    background-image: url('/public/Imagenes/comicss.jpg');
+    background-image: url('/Ev2-react/src/Imagenes/comicss.jpg');
     background-size: cover;
     background-position: center;
 }
 
 .card3 { /* Blogs */
-    background-image: url('/public/Imagenes/hero-blog.jpg');
+    background-image: url('/Ev2-react/src/Imagenes/hero-blog.jpg');
     background-size: cover;
     background-position: center;
 }
 
 .card4 { /* Contactanos */
-    background-image: url('/public/Imagenes/hero-contacto.jpg');
+    background-image: url('/Ev2-react/src/Imagenes/hero-contacto.jpg');
     background-size: cover;
     background-position: center;
 }
