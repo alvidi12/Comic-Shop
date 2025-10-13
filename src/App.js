@@ -1,20 +1,16 @@
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 import './App.css';
 import Home from './pages/Home';
-
+import Productos from './pages/Productos';
 
 function App() {
   return (
-     <Router>{/* Habilita la navegacion en el proyecto */}
-      <Routes>
-        <Route>
-          <Route path='/' element={<Home/>}/>{/* Agregando ruta home */}
-          {/* <Route path='/nosotros' element={<About/>}/>Agregando ruta a nosotros */}
-        </Route>
-      </Routes>
-
-
-    </Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/productos" element={<Productos />} />
+      {/* Agrega más rutas cuando necesites, ej: /nosotros, /contacto, /productos/:id */}
+    </Routes>
   );
 }
 

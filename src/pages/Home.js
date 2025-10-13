@@ -1,41 +1,27 @@
+// src/pages/Home.js
 import React from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "../index.css";
 
 function Home() {
+  const navigate = useNavigate();
+
   return (
     <div>
-      {/* Navbar */}
+      {/* Navbar simplificado: usa Link para evitar recarga */}
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
-          <a href="/" className="navbar-brand">
-            <img
-              className="Logo"
-              src="/Imagenes/Logo.png"
-              alt="Logo"
-              width="110"
-              height="auto"
-            />
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#menu"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+          <Link to="/" className="navbar-brand">
+            <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="110" />
+          </Link>
 
           <div className="collapse navbar-collapse justify-content-between" id="menu">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link active" href="/HTMLs/inicioSesion.html">
-                  Inicio Sesión
-                </a>
+                <Link className="nav-link" to="/login">Inicio Sesión</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link active" href="/HTMLs/registro.html">
-                  Regístrate
-                </a>
+                <Link className="nav-link" to="/registro">Regístrate</Link>
               </li>
             </ul>
           </div>
@@ -43,33 +29,24 @@ function Home() {
       </nav>
 
       {/* Contenido principal */}
-      <div className="container">
-        <div className="main-title text-center mt-4">
-          <h1 className="fw-bold text-shadow">¡Bienvenido a ComicShop!</h1>
-          <p className="shadow">
-            ¡Descubre nuevos cómics del universo de DC con increíbles personajes
-            que harán volar tu imaginación!
-          </p>
-        </div>
-
-        {/* Carrusel de tarjetas */}
+      <div className="cards-container">
+        {/* Tarjetas */}
         <div className="cards-section mt-5">
           <div className="cards-container d-flex flex-wrap justify-content-center gap-3">
             {/* TARJETA 1 */}
-            <div
-              className="card card1"
-              onClick={() => (window.location.href = "/HTMLs/Nosotros.html")}
-            >
+            <div className="card card1" onClick={() => navigate("/nosotros")} role="button" tabIndex={0}>
               <div className="card-content">
                 <div className="card-title">Nosotros</div>
                 <div className="card-description">Conócenos</div>
               </div>
             </div>
 
-            {/* TARJETA 2 */}
+            {/* TARJETA 2 -> Productos (esta debe navegar a /productos) */}
             <div
               className="card card2"
-              onClick={() => (window.location.href = "/HTMLs/productos.html")}
+              onClick={() => navigate("/productos")}
+              role="button"
+              tabIndex={0}
             >
               <div className="card-content">
                 <div className="card-title">Nuestros productos</div>
@@ -78,23 +55,15 @@ function Home() {
             </div>
 
             {/* TARJETA 3 */}
-            <div
-              className="card card3"
-              onClick={() => (window.location.href = "/HTMLs/blog.html")}
-            >
+            <div className="card card3" onClick={() => navigate("/blog")} role="button" tabIndex={0}>
               <div className="card-content">
                 <div className="card-title">Blogs</div>
-                <div className="card-description">
-                  Descubre las nuevas noticias
-                </div>
+                <div className="card-description">Descubre las nuevas noticias</div>
               </div>
             </div>
 
             {/* TARJETA 4 */}
-            <div
-              className="card card4"
-              onClick={() => (window.location.href = "/HTMLs/contacto.html")}
-            >
+            <div className="card card4" onClick={() => navigate("/contacto")} role="button" tabIndex={0}>
               <div className="card-content">
                 <div className="card-title">Contáctanos</div>
                 <div className="card-description">Envíanos tus dudas</div>
@@ -103,24 +72,21 @@ function Home() {
           </div>
         </div>
 
-        {/* Imagen de portada */}
+        {/* Portada */}
         <section className="tarjeta-portada mt-5 text-center">
           <div className="portada-container">
             <div className="info-section">
               <h2>Nuestros Servicios</h2>
-              <p>
-                Ofrecemos una gran variedad de cómics del mundo de DC, con
-                personajes históricos y otros que regresan con historias épicas.
-              </p>
+              <p>Ofrecemos una gran variedad de cómics del mundo de DC...</p>
             </div>
-            <img src="./Imagenes/portada.png" alt="portada" />
+            <img src="/Imagenes/portada.png" alt="portada" />
           </div>
         </section>
       </div>
 
       {/* Footer */}
-      <footer className="text-white text-center py-4 mt-5 bg-dark">
-        <button className="btn btn1" onClick={() => (window.location.href = "/HTMLs/contacto.html")}>Contáctanos</button>
+      <footer className="text-white text-center py-4 mt-5">
+        <button className="btn1" onClick={() => navigate("/contacto")}>Contáctanos</button>
         <p className="mt-3">&copy; Todos los derechos reservados 😸</p>
       </footer>
     </div>
