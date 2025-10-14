@@ -1,7 +1,6 @@
-// src/pages/Home.js
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "../index.css";
+import "../Home.css";
 
 function Home() {
   const navigate = useNavigate();
@@ -89,6 +88,7 @@ function Home() {
         <button className="btn1" onClick={() => navigate("/contacto")}>Contáctanos</button>
         <p className="mt-3">&copy; Todos los derechos reservados 😸</p>
       </footer>
+
     </div>
   );
 }
