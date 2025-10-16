@@ -12,6 +12,10 @@ import PoisonIvy from "./pages/PoisonIvy";
 import BirdsOfPrey from "./pages/BirdsOfPrey";
 import JusticeLeague from "./pages/JusticeLeague";
 import GreenArrow from "./pages/GreenArrow";
+import Blog from './pages/Blog';
+import { BlogAbsoluteWonderWoman } from './pages/BlogAbsoluteWonderWoman';
+import { BlogBatgirl } from "./pages/BlogBatgirl";
+import { BlogDCComic } from "./pages/BlogDcComic";
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
       <Route path="/productos/birds-of-prey" element={<BirdsOfPrey />} />
       <Route path="/productos/justice-league" element={<JusticeLeague />} />
       <Route path="/productos/green-arrow" element={<GreenArrow />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/aww" element={<BlogAbsoluteWonderWoman />} />
+      <Route path="/blog/batgirl" element={<BlogBatgirl />} />
+      <Route path="/blog/dccomic" element={<BlogDCComic />} />
     </Routes>
   );
 }
