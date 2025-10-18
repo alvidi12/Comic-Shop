@@ -3,7 +3,7 @@ import styles from '../styles/blogSinMov.css';
 
 export const BlogAbsoluteWonderWoman = () => {
   return (
-    <div className={styles.blogDetailContainer}>
+    <div className='blogUnico'>
       {/* Navbar */}
       <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>
         <div className="container-fluid">
