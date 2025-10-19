@@ -4,7 +4,7 @@ import '../styles/Blog.css';
 // Componente para la página principal del Blog
 const Blog = () => {
   return (
-    <div className="blog-container">
+    <div className="blog">
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
@@ -67,7 +67,7 @@ const Blog = () => {
           {/* Card 1 - Absolute Wonder Woman */}
           <div className="col-md-4 p-3" onClick={() => window.location.href='/blog/aww'}>
             <div className="card mb-4 card-personalizada">
-              <img className="card-img-top" src="/Imagenes/Wonder Woman.jpg" alt="Imagen" />
+              <img className="card-img-top" src="/Imagenes/Wonder Woman.jpg" alt="WonderWoman" />
               <div className="card-lobby">
                 <h5 className="card-title fw-bold">Conoces a ABSOLUTE WONDER WOMAN?!</h5>
                 <p className="card-text">¡LA GANADORA DEL PREMIO EISNER KELLY THOMPSON Y EL ARTISTA REVELACIÓN HAYDEN SHERMAN REINVENTARON A WONDER WOMAN DESDE CERO! Sin la isla paradisíaca… sin la hermandad que la formó… sin una misión de paz… ¡lo que queda es Absolute Wonder Woman!</p>
