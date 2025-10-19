@@ -1,4 +1,4 @@
-.blogDetailContainer {
+.blogUnico body {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
     url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
   background-size: cover;
@@ -6,7 +6,7 @@
 }
 
 /* Navbar */
-.navbar {
+.blogUnico .navbar {
   background: linear-gradient(
     to bottom,
     rgba(66, 48, 81, 1),
@@ -16,7 +16,7 @@
 }
 
 /* Cards personalizadas */
-.cardPersonalizada {
+.blogUnico .cardPersonalizada {
   background-color: #272637d2;
   border: 2px solid #7e7c9c;
   border-radius: 10px;
@@ -29,20 +29,19 @@
   height: 100%;
 }
 
-.cardPersonalizada:hover {
+.blogUnico .cardPersonalizada:hover {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Grid */
-.gridCard {
+.blogUnico .gridCard {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
 /* Footer */
-.footer,
-.footer p {
+.blogUnico .footer, .footer p {
   background: linear-gradient(
     to top,
     rgba(66, 48, 81, 1),
@@ -53,42 +52,42 @@
 }
 
 /* Botones */
-.btn {
+.blogUnico .btn {
   background-color: #75619d;
   color: #e4f2ff;
 }
-.btn:hover {
+.blogUnico .btn:hover {
   background-color: #3a2d34;
   color: #e4f2ff;
 }
 
-.btn1 {
+.blogUnico .btn1 {
   background-color: #fcd034;
   color: #2f3438;
 }
-.btn1:hover {
+.blogUnico .btn1:hover {
   background-color: #d5d5d5;
   color: #3a2d34;
 }
 
 /* Texto */
-.text {
+.blogUnico .text {
   font-weight: bold;
   color: #fcd034;
 }
 
 /* Mini carrito */
-.offcanvasCarrito {
+.blogUnico .offcanvasCarrito {
   background-color: #272637;
   color: #fcd034;
   width: 320px;
 }
 
-.offcanvasCarritoHeader {
+.blogUnico .offcanvasCarritoHeader {
   border-bottom: 2px solid #fcd034;
 }
 
-#carritoBody {
+.blogUnico #carritoBody {
   text-align: center;
   vertical-align: top;
   width: 80px;
