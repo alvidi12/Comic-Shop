@@ -6,16 +6,7 @@
   min-height: 100vh;
 }
 
-/* Navbar */
-.pagina-productos .navbar {
-  background: linear-gradient(to bottom, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 0.6), transparent);
-}
 
-/* Botones */
-.pagina-productos .btn {
-  background-color: #fcd034;
-  color: #2f3438;
-}
 
 .pagina-productos .btn:hover {
   background-color: #ceb457;
@@ -35,13 +26,6 @@
   font-size: 30px;
   border-bottom: 3px solid #fcd034;
   padding-bottom: 10px;
-}
-
-/* Footer */
-.pagina-productos footer,
-.pagina-productos footer p {
-  background: linear-gradient(to top, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 1.0), transparent);
-  color: #fcd034;
 }
 
 /* Tarjetas */
@@ -108,19 +92,3 @@
   height: auto;
 }
 
-/* Mini carrito */
-.pagina-productos .offcanvas.carrito {
-  background-color: #272637; 
-  color: #fcd034;
-  width: 320px;
-}
-
-.pagina-productos .offcanvas.carrito .offcanvas-header {
-  border-bottom: 2px solid #fcd034;
-}
-
-.pagina-productos #carrito-body {
-  text-align: center; 
-  vertical-align: top;
-  width: 80px; 
-}

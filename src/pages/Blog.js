@@ -1,58 +1,13 @@
 import React from 'react';
 import '../styles/Blog.css';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // Componente para la página principal del Blog
 const Blog = () => {
   return (
     <div className="blog">
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-dark">
-        <div className="container-fluid">
-          <a href="/" className="navbar-brand">
-            <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="110" height="auto" />
-          </a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse justify-content-between" id="menu">
-            <ul className="navbar-nav mx-auto">
-              <li className="nav-item"><a className="nav-link active" href="/nosotros">Nosotros</a></li>
-              <li className="nav-item"><a className="nav-link active" href="/productos">Productos</a></li>
-              <li className="nav-item"><a className="nav-link active" href="/blog">Blogs</a></li>
-              <li className="nav-item"><a className="nav-link active" href="/contacto">Contacto</a></li>
-            </ul>
-            <ul className="navbar-nav">
-              <li className="nav-item"><a className="nav-link active" href="/login">Inicio Sesión</a></li>
-              <li className="nav-item"><a className="nav-link active" href="/registro">Registrate</a></li>
-              <li className="nav-item"><a className="nav-link active" href="#" data-bs-toggle="offcanvas" data-bs-target="#miniCarrito"><i className="bi bi-cart-fill"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mini Carrito */}
-      <div className="offcanvas offcanvas-end carrito" tabIndex="-1" id="miniCarrito">
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title">Tu Carrito</h5>
-          <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-        </div>
-        <div className="offcanvas-body">
-          <table className="table table-dark table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody id="carrito-body"></tbody>
-          </table>
-          <div className="d-grid">
-            <button className="btn btn-carrito mt-3">Comprar</button>
-          </div>
-        </div>
-      </div>
+      <Navbar />
 
       {/* Contenido principal */}
       <div className="container my-5">
@@ -138,11 +93,7 @@ const Blog = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="text-white text-center py-4 mt-5">
-        <button className="btn btn1" onClick={() => window.location.href='/contacto'}>Contáctanos</button>
-        <p>&copy; Todos los derechos reservados😸</p>
-      </footer>
+      <Footer />
     </div>
   );
 };

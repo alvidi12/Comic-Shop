@@ -1,83 +1,12 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
-    background-size: cover;
-}
-
 /* --- PORTADA --- */
 
-.portada-container img {
+.home .portada-container img {
   width: 60%;
   max-width: 500px;
   border-radius: 15px;
 }
 
-.text-shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-}
-
-.shadow {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
-    font-size: 20px;
-}
-
-.navbar {
-    background: linear-gradient(to bottom, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 0.6), transparent);
-}
-
-.navbar-nav {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%; 
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.btn1 {
-    background-color: #fdce25e7; 
-    color: #02101b; 
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-}
-
-.btn1:hover {
-    background-color: #ceb457;
-    color: #d3dce2;
-}
-
-
-
-footer, footer p{
-    background: linear-gradient(to top, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 0.918), transparent);
-    color: #fcd034;
-}
-
-.main-title, h1 {
-    color: white;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    text-align: center;
-    padding: 10px 0;
-}
-
-.main-title p {
-    color: rgba(255,255,255,0.9);
-    font-size: 1.2rem;
-    font-weight: 300;
-}
-
-.info-section {
+.home .info-section {
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     text-align: center;
@@ -85,18 +14,43 @@ footer, footer p{
     
 }
 
-.portada-container {
+.home .portada-container {
     display: flex;
     flex-direction: column; 
     align-items: center;
     gap: 20px; 
 }
 
-/* --- CONTENEDOR DE TARJETAS --- */
+.home .main-title, h1 {
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-align: center;
+    padding: 10px 0;
+}
 
+.home .main-title p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.2rem;
+    font-weight: 300;
+}
 
+.home .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.home .shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    font-size: 20px;
+}
+
+.home .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 /* --- TARJETAS --- */
-.card {
+.home .card {
     position: relative;
     width: 350px;           /* tamaño uniforme */
     height: 200px;;          /* tamaño uniforme */
@@ -112,19 +66,19 @@ footer, footer p{
     background-size: cover;   /* imagen completa */
 }
 
-.card:hover {
+.home .card:hover {
     transform: translateY(-10px) scale(1.05);
     box-shadow: 5px 5px 40px rgb(255, 233, 66);
 }
 
 /* Contenido de la tarjeta y Título*/
-.card-content {
+.home .card-content {
     color: #ffffff;
     font-weight: 600; 
 }
 
 /* Descripción */
-.card-description {
+.home .card-description {
     font-size: 0.9rem;
     color: #f1eeee;
     text-shadow: 
@@ -133,16 +87,16 @@ footer, footer p{
 }
 
 /* --- TARJETAS INDIVIDUALES --- */
-.card1 {
+.home  .card1 {
     background-image: url('/public/Imagenes/hero-nosotros.jpg');
 }
-.card2 {
+.home .card2 {
     background-image: url('/public/Imagenes/comicss.jpg');
 }
-.card3 {
+.home .card3 {
     background-image: url('/public/Imagenes/hero-blog.jpg');
 }
-.card4 {
+.home .card4 {
     background-image: url('/public/Imagenes/hero-contacto.jpg');
 }
 
