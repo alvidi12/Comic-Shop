@@ -33,7 +33,6 @@ import AdminUser from "./pages-user/AdminUser";
 function App() {
   return (
     <Router>
-      {/* Estructura base: todo el sitio ocupa la altura completa */}
       <div className="d-flex flex-column min-vh-100">
         <Navbar />
 
