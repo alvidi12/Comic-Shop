@@ -12,12 +12,11 @@ body {
 /* --- PORTADA --- */
 
 .portada-container img {
-    width: 100%;        /* ocupa todo el ancho disponible */
-  
-    height: auto;       /* mantiene proporción */
-    border-radius: 12px; 
-    object-fit: cover;
+  width: 60%;
+  max-width: 500px;
+  border-radius: 15px;
 }
+
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
@@ -94,19 +93,7 @@ footer, footer p{
 }
 
 /* --- CONTENEDOR DE TARJETAS --- */
-.cards-section {
-    position: relative;
-    width: 100%;
-    margin-bottom: 60px;
-    padding: 20px 0;
-}
 
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-}
 
 /* --- TARJETAS --- */
 .card {
@@ -127,7 +114,7 @@ footer, footer p{
 
 .card:hover {
     transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    box-shadow: 5px 5px 40px rgb(255, 233, 66);
 }
 
 /* Contenido de la tarjeta y Título*/
