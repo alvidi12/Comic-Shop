@@ -1,29 +1,15 @@
-.pagina-producto-batgirl {
+.pagina-producto {
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
               url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh;
 }
 
-.pagina-producto-batgirl .navbar {
-  background: linear-gradient(to bottom, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 0.6), transparent);
-}
-
-.pagina-producto-batgirl .card-personalizada {
+.pagina-producto .card-personalizada {
   background-color: #f9fded;
 }
 
-.pagina-producto-batgirl .btn {
-  background-color: #fcd034;
-  color: #2f3438;
-}
-
-.pagina-producto-batgirl .btn:hover {
-  background-color: #ceb457;
-  color: #e4f2ff;
-}
-
-.pagina-producto-batgirl .btn-carrito-agregar {
+.pagina-producto .btn-carrito-agregar {
   background-color: #fcd034;
   color: #2f3438;
   border: none;
@@ -33,18 +19,18 @@
   cursor: pointer;
 }
 
-.pagina-producto-batgirl .btn-carrito-agregar:hover {
+.pagina-producto .btn-carrito-agregar:hover {
   background-color: #ceb457;
   color: #e4f2ff;
 }
 
-.pagina-producto-batgirl .titulo, 
-.pagina-producto-batgirl p.subtitulo {
+.pagina-producto .titulo, 
+.pagina-producto p.subtitulo {
   font-weight: bold;
   color: #fcd034;
 }
 
-.pagina-producto-batgirl .contenido h1 {
+.pagina-producto .contenido h1 {
   color: #473e1e; 
   font-size: clamp(20px, 4vw, 30px);
   margin-bottom: 20px;
@@ -53,13 +39,7 @@
   border-radius: 9px;
 }
 
-.pagina-producto-batgirl footer, 
-.pagina-producto-batgirl footer p {
-  background: linear-gradient(to top, rgba(66, 48, 81, 1.0), rgba(66, 48, 81, 1.0), transparent);
-  color: #fcd034;
-}
-
-.pagina-producto-batgirl .tarjeta {
+.pagina-producto .tarjeta {
   background-color: #272637d2;
   border: 2px solid #7e7c9c;
   border-radius: 10px;
@@ -72,14 +52,14 @@
   position: relative;
 }
 
-.pagina-producto-batgirl .tarjeta img {
+.pagina-producto .tarjeta img {
   max-width: 250px;
   max-height: 400px;
   object-fit: contain;
   justify-self: end;
 }
 
-.pagina-producto-batgirl .tarjeta-texto h2 {
+.pagina-producto .tarjeta-texto h2 {
   color: #dddacf;
   display: flex;
   justify-content: space-between;
@@ -90,21 +70,21 @@
   font-weight: bold;
 }
 
-.pagina-producto-batgirl .item2 {
+.pagina-producto .item2 {
   color: #fcd034;
   font-weight: bold;
   cursor: pointer;
 }
 
-.pagina-producto-batgirl .item2:hover {
+.pagina-producto .item2:hover {
   color: #bca039;
   cursor: default;
   background-color: #fcd034;     
   border-radius: 4px;
 }
 
-.pagina-producto-batgirl .tarjeta-texto h3, 
-.pagina-producto-batgirl .tarjeta-texto h5 {
+.pagina-producto .tarjeta-texto h3, 
+.pagina-producto .tarjeta-texto h5 {
   color: #c5cbfb;
   margin: 10px;
   line-height: 1.4;
@@ -115,31 +95,31 @@
   font-weight: normal;
 }
 
-.pagina-producto-batgirl .tarjeta-texto h3 {
+.pagina-producto .tarjeta-texto h3 {
   border-bottom: 3px solid #7e7c9c;
   font-weight: bold;
 }
 
-.pagina-producto-batgirl .tarjeta-texto h4 {
+.pagina-producto .tarjeta-texto h4 {
   color: #fcd034;
   text-align: left;
   font-weight: bold;
   font-size: clamp(13px, 2.5vw, 15px);
 }
 
-.pagina-producto-batgirl .tarjeta-texto .item {
+.pagina-producto .tarjeta-texto .item {
   color: #c5cbfb;
   font-weight: normal;
   margin-left: 5px;
 }
 
-.pagina-producto-batgirl .grid-tarjetas { 
+.pagina-producto .grid-tarjetas { 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: clamp(20px, 4vw, 40px);
 }
 
-.pagina-producto-batgirl .barra-titulo {
+.pagina-producto .barra-titulo {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -150,7 +130,7 @@
   gap: 20px;
 }
 
-.pagina-producto-batgirl .btn-retroceder {
+.pagina-producto .btn-retroceder {
   background-color: #1b1605;
   color: #fcd034;
   border: none;
@@ -161,44 +141,28 @@
   text-decoration: none;
 }
 
-.pagina-producto-batgirl .btn-retroceder:hover {
+.pagina-producto .btn-retroceder:hover {
   background-color: #2f2a15;
   color: #fff7d1;
 }
 
 @media (max-width: 768px) {
-  .pagina-producto-batgirl .tarjeta {
+  .pagina-producto .tarjeta {
     grid-template-columns: 1fr;
     text-align: center;
   }
 
-  .pagina-producto-batgirl .tarjeta img {
+  .pagina-producto .tarjeta img {
     justify-self: center;
   }
 
-  .pagina-producto-batgirl .tarjeta-texto {
+  .pagina-producto .tarjeta-texto {
     text-align: center;
   }
 
-  .pagina-producto-batgirl .tarjeta-texto h2 {
+  .pagina-producto .tarjeta-texto h2 {
     justify-content: center;
     flex-direction: column;
     gap: 10px;
   }
-}
-
-.pagina-producto-batgirl .offcanvas.carrito {
-  background-color: #272637; 
-  color: #fcd034;
-  width: 320px;
-}
-
-.pagina-producto-batgirl .offcanvas.carrito .offcanvas-header {
-  border-bottom: 2px solid #fcd034;
-}
-
-.pagina-producto-batgirl #carrito-body {
-  text-align: center; 
-  vertical-align: top;
-  width: 80px; 
 }
