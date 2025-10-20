@@ -15,7 +15,9 @@ import GreenArrow from "./pages/GreenArrow";
 import Blog from './pages/Blog';
 import { BlogAbsoluteWonderWoman } from './pages/BlogAbsoluteWonderWoman';
 import { BlogBatgirl } from "./pages/BlogBatgirl";
-import { BlogDCComic } from "./pages/BlogDcComic";
+import { BlogDcComic } from "./pages/BlogDcComic";
+import Nosotros from "./pages/Nosotros";
+import Contacto from "./pages/Contacto";
 
 function App() {
   return (
@@ -34,7 +36,10 @@ function App() {
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/aww" element={<BlogAbsoluteWonderWoman />} />
       <Route path="/blog/batgirl" element={<BlogBatgirl />} />
-      <Route path="/blog/dccomic" element={<BlogDCComic />} />
+      <Route path="/blog/dc-history" element={<BlogDcComic />} />
+      <Route path="/nosotros" element={<Nosotros />} />
+      <Route path="/contacto" element={<Contacto />} />
+
     </Routes>
   );
 }

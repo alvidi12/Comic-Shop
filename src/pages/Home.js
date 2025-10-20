@@ -1,48 +1,16 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Home.css";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function Home() {
   const navigate = useNavigate();
 
   return (
-    <div>
-      {/* Navbar */}
-<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div className="container-fluid">
-    {/* Logo */}
-    <Link to="/" className="navbar-brand">
-      <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="110" />
-    </Link>
-
-    {/* Botón hamburguesa */}
-    <button
-      className="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#menu"
-      aria-controls="menu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span className="navbar-toggler-icon"></span>
-    </button>
-
-    {/* Contenido colapsable */}
-    <div className="collapse navbar-collapse justify-content-end" id="menu">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link className="nav-link" to="/login">Inicio Sesión</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/registro">Regístrate</Link>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
+    <div className="home">
+        <Navbar />
+  
       {/*TARJETAS CENTRADAS */}
       <div className="cards-section mt-5">
         <div className="cards-container d-flex flex-wrap justify-content-center align-items-center gap-4">
@@ -90,12 +58,7 @@ function Home() {
           <img src="/Imagenes/portada.png" alt="portada" />
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="text-white text-center py-4 mt-5">
-        <button className="btn1" onClick={() => navigate("/contacto")}>Contáctanos</button>
-        <p className="mt-3">&copy; Todos los derechos reservados 😸</p>
-      </footer>
+      <Footer />
     </div>
   );
 }

@@ -5,16 +5,6 @@
   min-height: 100vh;
 }
 
-/* Navbar */
-.blogUnico .navbar {
-  background: linear-gradient(
-    to bottom,
-    rgba(66, 48, 81, 1),
-    rgba(66, 48, 81, 0.6),
-    transparent
-  );
-}
-
 /* Cards personalizadas */
 .blogUnico .cardPersonalizada {
   background-color: #272637d2;
@@ -40,55 +30,18 @@
   gap: 20px;
 }
 
-/* Footer */
-.blogUnico .footer, .footer p {
-  background: linear-gradient(
-    to top,
-    rgba(66, 48, 81, 1),
-    rgba(66, 48, 81, 1),
-    transparent
-  );
-  color: #fcd034;
-}
-
 /* Botones */
-.blogUnico .btn {
+.blogUnico .btn-blog {
   background-color: #75619d;
   color: #e4f2ff;
 }
-.blogUnico .btn:hover {
+.blogUnico .btn-blog:hover {
   background-color: #3a2d34;
   color: #e4f2ff;
-}
-
-.blogUnico .btn1 {
-  background-color: #fcd034;
-  color: #2f3438;
-}
-.blogUnico .btn1:hover {
-  background-color: #d5d5d5;
-  color: #3a2d34;
 }
 
 /* Texto */
 .blogUnico .text {
   font-weight: bold;
   color: #fcd034;
-}
-
-/* Mini carrito */
-.blogUnico .offcanvasCarrito {
-  background-color: #272637;
-  color: #fcd034;
-  width: 320px;
-}
-
-.blogUnico .offcanvasCarritoHeader {
-  border-bottom: 2px solid #fcd034;
-}
-
-.blogUnico #carritoBody {
-  text-align: center;
-  vertical-align: top;
-  width: 80px;
 }

@@ -1,113 +1,12 @@
 import React from 'react';
 import styles from '../styles/blogSinMov.css';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export const BlogAbsoluteWonderWoman = () => {
   return (
     <div className='blogUnico'>
-      {/* Navbar */}
-      <nav className={`navbar navbar-expand-lg navbar-dark ${styles.navbar}`}>
-        <div className="container-fluid">
-          <a href="/" className="navbar-brand">
-            <img
-              className="Logo"
-              src="/Imagenes/Logo.png"
-              alt="Logo"
-              width="110"
-              height="auto"
-            />
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#menu"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div
-            className="collapse navbar-collapse justify-content-between"
-            id="menu"
-          >
-            <ul className="navbar-nav mx-auto">
-              <li className="nav-item">
-                <a className="nav-link active" href="/nosotros">
-                  Nosotros
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/productos">
-                  Productos
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/blog">
-                  Blogs
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/contacto">
-                  Contacto
-                </a>
-              </li>
-            </ul>
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <a className="nav-link active" href="/login">
-                  Inicio Sesión
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link active" href="/registro">
-                  Regístrate
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  href="#"
-                  data-bs-toggle="offcanvas"
-                  data-bs-target="#miniCarrito"
-                >
-                  <i className="bi bi-cart-fill"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mini Carrito */}
-      <div
-        className={`offcanvas offcanvas-end ${styles.offcanvasCarrito}`}
-        tabIndex="-1"
-        id="miniCarrito"
-      >
-        <div
-          className={`offcanvas-header ${styles.offcanvasCarritoHeader}`}
-        >
-          <h5 className="offcanvas-title">Tu Carrito</h5>
-          <button
-            type="button"
-            className="btn-close text-reset"
-            data-bs-dismiss="offcanvas"
-          ></button>
-        </div>
-        <div className="offcanvas-body">
-          <table className="table table-dark table-striped table-sm">
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-              </tr>
-            </thead>
-            <tbody id="carritoBody"></tbody>
-          </table>
-          <div className="d-grid">
-            <button className="btn btn-carrito mt-3">Comprar</button>
-          </div>
-        </div>
-      </div>
+      <Navbar />
 
       {/* Contenido del Blog */}
       <div className="container">
@@ -167,7 +66,7 @@ export const BlogAbsoluteWonderWoman = () => {
                       con las Amazonas? ¿Por qué se salvó Diana? ¿Cómo llegó
                       del Infierno, a donde la encontramos en el presente?
                     </p>
-                    <a href="/blog" className="btn mt-auto">
+                    <a href="/blog" className="btn btn-blog mt-auto">
                       Volver
                     </a>
                   </div>
@@ -178,18 +77,7 @@ export const BlogAbsoluteWonderWoman = () => {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer
-        className={`text-white text-center py-4 mt-5 ${styles.footer}`}
-      >
-        <button
-          className={`btn ${styles.btn1}`}
-          onClick={() => (window.location.href = '/contacto')}
-        >
-          Contáctanos
-        </button>
-        <p>&copy; Todos los derechos reservados 😸</p>
-      </footer>
+      <Footer />
     </div>
   );
 };
