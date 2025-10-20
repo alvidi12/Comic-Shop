@@ -1,13 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/Productos.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 export default function Productos() {
   return (
     <div className="pagina-productos d-flex flex-column min-vh-100">
-      <Navbar />
 
       {/* Portada */}
       <div className="container my-5">
@@ -105,7 +102,6 @@ export default function Productos() {
           </div>
         </div>
       </div>
-      <Footer />
       </div>
   );
 }

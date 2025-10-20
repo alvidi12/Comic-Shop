@@ -1,13 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/SalaVenta.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 export default function SalaVenta({ producto }) {
   return (
     <div className="pagina-producto d-flex flex-column min-vh-100">
-      <Navbar />
 
       {/* Contenido principal */}
       <main className="flex-grow-1">
@@ -76,8 +73,6 @@ export default function SalaVenta({ producto }) {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
