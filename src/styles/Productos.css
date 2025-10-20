@@ -44,6 +44,7 @@
   text-align: center;
   position: relative;
   display: block;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .pagina-productos .tarjeta-link {
@@ -54,8 +55,8 @@
 }
 
 .pagina-productos .tarjeta:hover {
-  transform: translateY(-3px);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px) scale(1);
+    box-shadow: 5px 5px 40px rgb(216, 215, 205);
 }
 
 .pagina-productos .tarjeta h3 {

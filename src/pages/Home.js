@@ -1,15 +1,12 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../styles/Home.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 function Home() {
   const navigate = useNavigate();
 
   return (
     <div className="home">
-        <Navbar />
   
       {/*TARJETAS CENTRADAS */}
       <div className="cards-section mt-5">
@@ -58,7 +55,6 @@ function Home() {
           <img src="/Imagenes/portada.png" alt="portada" />
         </div>
       </section>
-      <Footer />
     </div>
   );
 }

@@ -1,0 +1,36 @@
+.login body {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.login .inicio{
+    background-color: #272637d2;
+    border: 2px solid #7e7c9c;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    color: #cdd3ff;
+
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.login .casillas{
+    background-color: #f9eaff;
+}
+
+.login .titulo{
+    color: #fcd034;
+}
+
+.login .mensaje-flotante {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1050;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgb(56, 15, 69);
+}

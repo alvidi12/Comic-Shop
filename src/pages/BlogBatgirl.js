@@ -1,18 +1,15 @@
 import React from 'react';
 import '../styles/blogSinMov.css';
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 export const BlogBatgirl = () => {
   return (
-    <div className="blogUnico">
-      <Navbar />
+    <div className='blogUnico'>
 
       {/* Contenido del Blog */}
       <div className="container">
         <div className="row d-flex justify-content-center">
           <div className="col-12">
-            <div className="card mb-4 mt-5 card-personalizada">
+            <div className="card mb-4 mt-5 cardPersonalizada">
               <div className="row no-gutters">
                 <div className="col-md-6">
                   <img className="card-img" src="/Imagenes/Cassandra Cain Icon (DC Comics).jpg" alt="Imagen" />
@@ -32,8 +29,6 @@ export const BlogBatgirl = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };
