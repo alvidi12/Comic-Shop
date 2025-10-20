@@ -1,15 +1,22 @@
+.contacto {
+  min-height: 100vh; /* ocupa toda la pantalla */
+  display: flex;
+  flex-direction: column;
+}
+.contacto .main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.contacto{
-    background-color: #272637d2;
-    border: 2px solid #7e7c9c;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    color: #cdd3ff;
-
-    display: flex;
-    flex-direction: column;
-    height: auto;
+.contacto .card-personalizada {
+  background-color: rgba(39, 38, 55, 0.82);
+  border: 2px solid #7e7c9c;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+  color: #cdd3ff;
 }
 
 .contacto .casillas{

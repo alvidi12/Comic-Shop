@@ -6,9 +6,7 @@ export default function Navbar() {
     <div className="navbarComponent">
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand">
-          <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="110" />
-        </Link>
+        <Link to="/" className="navbar-brand"><img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="110" /></Link>
 
         <button
           className="navbar-toggler"
@@ -27,8 +25,9 @@ export default function Navbar() {
             <li className="nav-item"><Link className="nav-link active" to="/contacto">Contacto</Link></li>
           </ul>
           <ul className="navbar-nav">
-            <li className="nav-item"><Link className="nav-link active" to="/login">Inicio Sesión</Link></li>
-            <li className="nav-item"><Link className="nav-link active" to="/registro">Regístrate</Link></li>
+            <li className="nav-item">
+              <Link to="/login" className="nav-link">Inicio Sesión</Link></li>
+            <li className="nav-item"><Link to="/register" className="nav-link">Registrate</Link></li>
             <li className="nav-item">
               <button className="nav-link active btn border-0 bg-transparent p-0"
               type="button"

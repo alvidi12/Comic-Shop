@@ -1,13 +1,10 @@
 import React from 'react';
 import '../styles/Blog.css';
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 // Componente para la página principal del Blog
 const Blog = () => {
   return (
     <div className="blog">
-      <Navbar />
 
       {/* Contenido principal */}
       <div className="container my-5">
@@ -92,8 +89,6 @@ const Blog = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

@@ -1,27 +1,18 @@
 import React from 'react';
-import styles from '../styles/blogSinMov.css';
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import '../styles/blogSinMov.css';
 
 export const BlogAbsoluteWonderWoman = () => {
   return (
     <div className='blogUnico'>
-      <Navbar />
 
       {/* Contenido del Blog */}
       <div className="container">
         <div className="row d-flex justify-content-center">
           <div className="col-12">
-            <div
-              className={`card mb-4 mt-5 ${styles.cardPersonalizada}`}
-            >
+            <div className={`card mb-4 mt-5 cardPersonalizada`}>
               <div className="row no-gutters">
                 <div className="col-md-6">
-                  <img
-                    className="card-img"
-                    src="/Imagenes/AbsoluteWonderWoman1.jpg"
-                    alt="Imagen"
-                  />
+                  <img className="card-img" src="/Imagenes/AbsoluteWonderWoman1.jpg" alt="Imagen"/>
                 </div>
                 <div className="col-md-6">
                   <div className="card-lobby d-flex flex-column justify-content-center p-4">
@@ -77,7 +68,6 @@ export const BlogAbsoluteWonderWoman = () => {
         </div>
       </div>
 
-      <Footer />
     </div>
   );
 };

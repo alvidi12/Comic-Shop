@@ -1,5 +1,3 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import { useState } from "react";
 import "../styles/Contacto.css"
 
@@ -15,11 +13,10 @@ export default function Contacto() {
 
   return (
     <div className="contacto">
-      <Navbar />
 
-      <div className="container mt-5">
+      <div className="main-content container mt-5">
         <div className="col-lg-6 mx-auto">
-          <div className="card mb-3 contacto p-4">
+          <div className="card mb-3 card-personalizada p-4">
             <h4 className="fw-bold text-center titulo">Contáctanos</h4>
 
             <form onSubmit={enviarFormulario}>
@@ -46,7 +43,6 @@ export default function Contacto() {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
