@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function JusticeLeague() {
   const producto = {
+    id: 5,
     titulo: "¡Una saga de la Liga de la Justicia!",
     nombre: "¡UNA SAGA DE LA LIGA DE LA JUSTICIA!",
     clasificacion: "Average 4.8 / 5 out of 34",
