@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function Batgirl() {
   const producto = {
+    id: 1,
     titulo: "Batgirl",
     nombre: "CRÓNICAS DE BATGIRL",
     clasificacion: " Average 4.9 / 5 out of 102",

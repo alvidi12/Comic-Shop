@@ -1,0 +1,85 @@
+/* Fondo principal */
+
+.checkout .container {
+  background-color: #272637d2;
+    border: 2px solid #7e7c9c;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    color: #cdd3ff;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.text-vacio {
+  color: #fcd034;
+}
+
+/* Título */
+.checkout h2 {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.checkout table th,
+.checkout table td {
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(252, 208, 52, 0.3);
+}
+
+.checkout table tr:hover {
+  background-color: rgba(252, 208, 52, 0.08);
+}
+
+.checkout input,
+.checkout select {
+  background-color: #2f2f45;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+.checkout label {
+  color: #fcd034;
+  font-weight: 600;
+}
+
+.checkout .fw-bold {
+  color: #fcd034;
+  font-size: 1.2rem;
+}
+
+.checkout button.btn-success:hover {
+  background-color: #d5d5d5 ;
+  color: #3a2d34;
+}
+
+/* Botón de eliminar */
+.checkout .btn-danger {
+  background-color: #fcd034;
+  border: none;
+  color: #0c0116;
+  transition: 0.3s ease;
+}
+
+.checkout .btn-danger:hover {
+  background-color: #5b4572;
+  color: #fff;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .checkout .container {
+    padding: 25px;
+  }
+
+  .checkout table td input {
+    width: 60px !important;
+  }
+}

@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function PoisonIvy() {
   const producto = {
+    id: 6,
     titulo: "La saga de Poison Ivy",
     nombre: "LA SAGA DE POISON IVY",
     clasificacion: "Average 4.5 / 5 out of 45",
