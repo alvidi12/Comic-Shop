@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function BirdsOfPrey() {
   const producto = {
+    id: 3,
     titulo: "Birds of Prey ¡Han vuelto!",
     nombre: "BIRDS OF PREY ¡HAN VUELTO!",
     clasificacion: "Average 4.9 / 5 out of 110",

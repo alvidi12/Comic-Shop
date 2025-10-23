@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function WonderWoman() {
   const producto = {
+    id: 8,
     titulo: "Wonder Woman ¡Absoluta!",
     nombre: "WONDER WOMAN ¡ABSOLUTA!",
     clasificacion: "Average 4.8 / 5 out of 74",

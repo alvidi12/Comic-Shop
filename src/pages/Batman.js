@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function Batman() {
   const producto = {
+    id: 2,
     titulo: "Batman The Dark Knight",
     nombre: "BATMAN THE DARK KNIGHT",
     clasificacion: "Average 4.8 / 5 out of 368",

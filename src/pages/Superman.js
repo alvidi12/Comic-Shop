@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function Superman() {
   const producto = {
+    id: 7,
     titulo: "La saga de Superman",
     nombre: "LA SAGA DE SUPERMAN",
     clasificacion: "Average 4.8 / 5 out of 14",
