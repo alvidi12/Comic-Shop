@@ -1,16 +1,30 @@
-/* Fondo principal */
-
-.checkout .container{
-  background-color: #272637d2;
-    border: 2px solid #7e7c9c;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    color: #cdd3ff;
-    display: flex;
-    flex-direction: column;
-    height: auto;
+html, body {
+  height: auto;
+  min-height: 100%;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
 }
+
+.checkout {
+  min-height: auto;  
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.checkout .container {
+  min-height: auto; 
+  max-height: none;
+  overflow: visible;
+  background-color: #272637d2;
+  border: 2px solid #7e7c9c;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  color: #cdd3ff;
+  padding: 50px 20px;
+  box-sizing: border-box;
+}
+
 
 .text-vacio {
   color: #fcd034;
@@ -75,17 +89,14 @@
 
 /* Responsivo */
 @media (max-width: 768px) {
-  .checkout .table {
-    font-size: 0.9rem;
+  .checkout {
+    padding: 20px 10px;
     background-attachment: scroll;
   }
 
+  .checkout .table, 
   .checkout .form-control, 
   .checkout .form-select {
     font-size: 0.9rem;
-  }
-
-  .checkout h2 {
-    font-size: 1.5rem;
   }
 }
