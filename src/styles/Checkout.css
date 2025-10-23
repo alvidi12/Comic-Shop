@@ -1,6 +1,6 @@
 /* Fondo principal */
 
-.checkout .container {
+.checkout .container{
   background-color: #272637d2;
     border: 2px solid #7e7c9c;
     border-radius: 10px;
@@ -75,11 +75,17 @@
 
 /* Responsivo */
 @media (max-width: 768px) {
-  .checkout .container {
-    padding: 25px;
+  .checkout .table {
+    font-size: 0.9rem;
+    background-attachment: scroll;
   }
 
-  .checkout table td input {
-    width: 60px !important;
+  .checkout .form-control, 
+  .checkout .form-select {
+    font-size: 0.9rem;
+  }
+
+  .checkout h2 {
+    font-size: 1.5rem;
   }
 }
