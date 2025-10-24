@@ -11,7 +11,7 @@ export default function SalaVenta({ producto }) {
     agregarAlCarrito({
       id: producto.id,
       nombre: producto.nombre,
-      precio: producto.precio,
+      precio: Number(producto.precio),
       imagen: producto.imagen,
     });
 
