@@ -36,7 +36,7 @@ import Contacto from "./pages/Contacto";
 // Usuarios
 import Login from "./pages-user/Login";
 import Register from "./pages-user/Register";
-import AdminUser from "./AdminPages/AdminUser";
+import AdminUser from "./pages-user/AdminUser";
 // Checkout
 import Checkout from "./pages/Checkout";
 
