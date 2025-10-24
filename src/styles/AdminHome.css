@@ -1,0 +1,115 @@
+.home .portada-container img {
+  width: 60%;
+  max-width: 500px;
+  border-radius: 15px;
+}
+
+.home .info-section {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-align: center;
+    padding: 0 40px;
+    
+}
+
+.home .portada-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 20px; 
+}
+
+.home .main-title, h1 {
+    color: white;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    text-align: center;
+    padding: 10px 0;
+}
+
+.home .main-title p {
+    color: rgba(255,255,255,0.9);
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.home .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.home .shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+    font-size: 20px;
+}
+
+.home .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+/* --- TARJETAS --- */
+.home .card {
+    position: relative;
+    width: 350px;           /* tamaño uniforme */
+    height: 200px;;          /* tamaño uniforme */
+    border-radius: 15px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+
+    display: flex;
+    padding: 20px;
+    color: white;
+    background-size: cover;   /* imagen completa */
+}
+
+.home .card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 5px 5px 40px rgb(255, 233, 66);
+}
+
+/* Contenido de la tarjeta y Título*/
+.home .card-content {
+    color: #ffffff;
+    font-weight: 600; 
+}
+
+/* Descripción */
+.home .card-description {
+    font-size: 0.9rem;
+    color: #f1eeee;
+    text-shadow: 
+        0 2px 4px rgba(0,0,0,0.8),
+        0 4px 8px rgba(0,0,0,0.4);
+}
+
+/* --- TARJETAS INDIVIDUALES --- */
+.home  .card1 {
+    background-image: url('/public/Imagenes/eliminarusuarios.webp');
+}
+.home .card2 {
+    background-image: url('/public/Imagenes/Batmandccomics.jpg');
+}
+
+
+/* --- MEDIA QUERY PARA MÓVIL --- */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;  /* apilar tarjetas verticalmente */
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card {
+        width: 90%;      /* ocupa casi todo el ancho en móvil */
+        max-width: 350px;
+        height: auto;    /* que se ajuste según contenido */
+    }
+
+    .portada-container img {
+        width: 90%;      /* deja margen lateral en móvil */
+        max-width: none; /* elimina límite si quieres que ocupe casi todo el ancho */
+    }
+}
+

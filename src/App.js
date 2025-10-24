@@ -36,7 +36,9 @@ import Contacto from "./pages/Contacto";
 // Usuarios
 import Login from "./pages-user/Login";
 import Register from "./pages-user/Register";
-import AdminUser from "./pages-user/AdminUser";
+//Paginas Administrador
+import AdminHome from "./AdminPages/AdminHome";
+import AdminUser from "./AdminPages/AdminUser";
 // Checkout
 import Checkout from "./pages/Checkout";
 
@@ -72,7 +74,8 @@ function App() {
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/admin" element={<AdminUser />} />
+              <Route path="/admin" element={<AdminHome />} />
+              <Route path="/adminuser" element={<AdminUser />} />
               <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </div>
