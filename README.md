@@ -72,5 +72,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 npm install bootstrap-icons
 
--para generar el comprobante
+-para generar el comprobante pdf
 npm install jspdf
