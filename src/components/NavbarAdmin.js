@@ -17,7 +17,7 @@ export default function NavbarAdmin() {
         <div className="container-fluid">
           {/* Logo redirige a dashboard admin */}
           <Link to="/admin-panel" className="navbar-brand">
-            <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="110" />
+            <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="90" />
           </Link>
 
           <button

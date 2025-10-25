@@ -84,7 +84,7 @@ export default function Navbar() {
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
           <Link to="/" className="navbar-brand">
-            <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="110" />
+            <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="90" />
           </Link>
 
           <button
