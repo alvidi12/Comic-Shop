@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import "../styles/AdminUser.css";
 
 export default function AdminUsers() {
@@ -40,39 +41,39 @@ export default function AdminUsers() {
         </ul>
 
         {/* Contenido de tabs */}
-        <div className="card p-4 mx-auto col-lg-6">
+        <div className="card registro p-4 mx-auto col-lg-6">
           {activeTab === "registro" && (
             <>
               <h3 className="mb-3">Registro de Usuario</h3>
               <form>
                 <input
                   type="text"
-                  className="form-control mb-3"
+                  className="form-control mb-4"
                   placeholder="RUN (12.345.678-9)"
                 />
                 <input
                   type="text"
-                  className="form-control mb-3"
+                  className="form-control mb-4"
                   placeholder="Nombre"
                 />
                 <input
                   type="text"
-                  className="form-control mb-3"
+                  className="form-control mb-4"
                   placeholder="Apellidos"
                 />
                 <input
                   type="email"
-                  className="form-control mb-3"
+                  className="form-control mb-4"
                   placeholder="usuario@personal.cl"
                 />
                 <input
                   type="text"
-                  className="form-control mb-3"
+                  className="form-control mb-4"
                   placeholder="Dirección"
                 />
                 <input
                   type="text"
-                  className="form-control mb-3"
+                  className="form-control mb-4"
                   placeholder="Región"
                 />
                 <button className="btn btn-primary w-100">Guardar</button>
@@ -82,7 +83,7 @@ export default function AdminUsers() {
 
           {activeTab === "modificar" && (
             <>
-              <h3 className="mb-3">Modificación de usuarios</h3>
+              <h3 className="mb-4">Modificación de usuarios</h3>
               <table className="table table-dark table-bordered">
                 <thead>
                   <tr>
@@ -109,7 +110,7 @@ export default function AdminUsers() {
 
           {activeTab === "eliminar" && (
             <>
-              <h3 className="mb-3">Eliminar usuarios</h3>
+              <h3 className="mb-4">Eliminar usuarios</h3>
               <table className="table table-dark table-bordered">
                 <thead>
                   <tr>

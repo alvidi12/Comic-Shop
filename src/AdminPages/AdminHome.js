@@ -12,7 +12,7 @@ function AdminHome() {
       <div className="cards-section mt-5">
         <div className="cards-container d-flex flex-wrap justify-content-center align-items-center gap-4">
           {/* TARJETA 1 */}
-          <div className="card card1" onClick={() => navigate("/adminuser")} role="button" tabIndex={0}>
+          <div className="card card11" onClick={() => navigate("/admin-panel/adminuser")} role="button" tabIndex={0}>
             <div className="card-content">
               <div className="card-title">Usuarios</div>
               <div className="card-description">Registra, modifica y elimina usuarios</div>
@@ -20,7 +20,7 @@ function AdminHome() {
           </div>
 
           {/* TARJETA 2 */}
-          <div className="card card2" onClick={() => navigate("/productos")} role="button" tabIndex={0}>
+          <div className="card card22" onClick={() => navigate("/admin-panel/adminproducts")} role="button" tabIndex={0}>
             <div className="card-content">
               <div className="card-title">Productos</div>
               <div className="card-description">Registra, modifica y elimina productos</div>
