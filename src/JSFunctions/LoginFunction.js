@@ -4,8 +4,6 @@
 // Usamos funciones compatibles con React y React Router v6.
 
 export function loginHandler(correo, contrasena, navigate, setMensaje) {
-  // Comentario original mantenido (no había en este archivo)
-
   // Validación de campos vacíos
   if (!correo || !contrasena) {
     setMensaje("Por favor completa todos los campos.");
@@ -19,16 +17,22 @@ export function loginHandler(correo, contrasena, navigate, setMensaje) {
   //  Dominios permitidos para usuarios normales
   const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
 
-  // Verificamos si es administrador
+  // 🔐 Verificamos si es administrador
   if (correo === adminCorreo && contrasena === adminContra) {
     setMensaje("Inicio de sesión como Administrador exitoso. Redirigiendo...");
+
+    // ✅ Guardamos en localStorage el rol
+    localStorage.setItem("usuarioRol", "admin");
+
+    // ✅ Redirigimos al panel exclusivo del administrador
     setTimeout(() => {
-      navigate("/admin"); // Esta ruta es un placeholder para la futura pantalla admin
+      navigate("/admin-panel"); // 🔥 Nueva ruta para AppAdmin
     }, 1000);
+
     return;
   }
 
-  // Validar si el dominio del correo pertenece a uno permitido
+  // ✅ Validar si el dominio del correo pertenece a uno permitido (usuario normal)
   const tieneDominioValido = dominiosPermitidos.some((dominio) =>
     correo.endsWith(dominio)
   );
@@ -40,9 +44,10 @@ export function loginHandler(correo, contrasena, navigate, setMensaje) {
     return;
   }
 
-  // Si el usuario no es administrador pero el dominio es válido, redirigir a Home
+  // ✅ Usuario normal
   setMensaje("¡Inicio de sesión exitoso! Redirigiendo...");
+  localStorage.setItem("usuarioRol", "user"); // Guardamos rol de usuario normal
   setTimeout(() => {
-    navigate("/"); //Ruta funcional actual
+    navigate("/"); // Ruta actual del usuario normal
   }, 1000);
 }
