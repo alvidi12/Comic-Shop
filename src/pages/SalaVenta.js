@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { CarritoContext } from "../context/CarritoContext";
 import "../styles/SalaVenta.css";
 
 export default function SalaVenta({ producto }) {
+  const { agregarAlCarrito } = useContext(CarritoContext); // Importa la función global del carrito
+  const [mostrarAlerta, setMostrarAlerta] = useState(false); // Estado local para mostrar mensaje visual
+
+  const handleComprar = () => {
+    agregarAlCarrito({
+      id: producto.id,
+      nombre: producto.nombre,
+      precio: Number(producto.precio),
+      imagen: producto.imagen,
+    });
+
+    // Mostrar un mensaje temporal "Producto seleccionado"
+    setMostrarAlerta(true);
+    setTimeout(() => setMostrarAlerta(false), 2000);
+  };
+
   return (
     <div className="pagina-producto d-flex flex-column min-vh-100">
-
       {/* Contenido principal */}
       <main className="flex-grow-1">
         <div className="container my-5">
@@ -49,12 +65,12 @@ export default function SalaVenta({ producto }) {
 
                   <h5>{producto.descripcion}</h5>
 
+                  {/* Sección de precio y botón */}
                   <h2>
                     {producto.precio.toLocaleString("es-CL")} CLP{" "}
                     <button
                       className="btn btn-carrito-agregar"
-                      data-nombre={producto.nombre}
-                      data-precio={producto.precio}
+                      onClick={handleComprar} //Aquí se ejecuta la función
                     >
                       COMPRAR
                     </button>
@@ -63,12 +79,15 @@ export default function SalaVenta({ producto }) {
               </div>
             </div>
 
+            {/* Mensaje de alerta */}
             <div
               id="mensaje-alerta"
-              className="alert alert-success text-center d-none"
+              className={`alert alert-success text-center ${
+                mostrarAlerta ? "" : "d-none"
+              }`}
               role="alert"
             >
-              Producto seleccionado
+              Producto agregado al carrito
             </div>
           </div>
         </div>

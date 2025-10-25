@@ -3,6 +3,7 @@ import SalaVenta from "./SalaVenta";
 
 export default function GreenArrow() {
   const producto = {
+    id: 4,
     titulo: "La saga de Green Arrow",
     nombre: "LA SAGA DE GREEN ARROW",
     clasificacion: "Average 4.7 / 5 out of 43",
