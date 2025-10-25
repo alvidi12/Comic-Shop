@@ -82,3 +82,12 @@ body {
   background-color: #d5d5d5;
   color: #3a2d34;
 }
+
+/*botón X del carrito */
+.navbarComponent #miniCarrito .btn-close {
+  filter: invert(86%) sepia(84%) saturate(324%) hue-rotate(351deg) brightness(104%) contrast(101%);
+  opacity: 1;
+}
+.navbarComponent #miniCarrito .btn-close:hover {
+  transform: scale(1.1);
+}

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Components.css";
@@ -8,20 +8,72 @@ export default function Navbar() {
   const { carrito, total } = useContext(CarritoContext);
   const navigate = useNavigate();
 
+  //controlar offcanvas y el botón que lo abre
+  const offcanvasRef = useRef(null);
+  const toggleBtnRef = useRef(null);
+
+  //estados para evitar cierres/aberturas en mitad de animaciones
+  const [isOpen, setIsOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  //inicializar instancia de Bootstrap y manejar clic fuera de manera robusta
+  useEffect(() => {
+    const el = offcanvasRef.current;
+    if (!el) return;
+
+    const instance = bootstrap.Offcanvas.getOrCreateInstance(el);
+
+    const onShow = () => { setIsAnimating(true); };
+    const onShown = () => { setIsAnimating(false); setIsOpen(true); };
+    const onHide = () => { setIsAnimating(true); };
+    const onHidden = () => { setIsAnimating(false); setIsOpen(false); };
+
+    el.addEventListener("show.bs.offcanvas", onShow);
+    el.addEventListener("shown.bs.offcanvas", onShown);
+    el.addEventListener("hide.bs.offcanvas", onHide);
+    el.addEventListener("hidden.bs.offcanvas", onHidden);
+
+    //usar 'pointerdown' mejora la fiabilidad frente a bubbling tardío de 'click'
+    const handlePointerDown = (evt) => {
+      if (!isOpen || isAnimating) return;
+
+      const path = evt.composedPath ? evt.composedPath() : null;
+      const target = evt.target;
+
+      //si el clic fue dentro del offcanvas, no cerramos
+      const clickedInsideOffcanvas =
+        el.contains(target) || (path && path.includes(el));
+      if (clickedInsideOffcanvas) return;
+
+      //si el clic fue en el botón que abre el carrito, no cerramos
+      const toggleEl = toggleBtnRef.current;
+      const clickedToggle =
+        toggleEl &&
+        (toggleEl.contains(target) || (path && path.includes(toggleEl)));
+      if (clickedToggle) return;
+
+      //cierre seguro
+      instance.hide();
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      el.removeEventListener("show.bs.offcanvas", onShow);
+      el.removeEventListener("shown.bs.offcanvas", onShown);
+      el.removeEventListener("hide.bs.offcanvas", onHide);
+      el.removeEventListener("hidden.bs.offcanvas", onHidden);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [isOpen, isAnimating]);
+
   const irACheckout = () => {
-    const offcanvasEl = document.getElementById("miniCarrito");
-    if (offcanvasEl) {
-      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
-      if (bsOffcanvas) bsOffcanvas.hide();
+    //cierre controlado antes de navegar
+    const el = offcanvasRef.current;
+    if (el) {
+      const inst = bootstrap.Offcanvas.getInstance(el) || bootstrap.Offcanvas.getOrCreateInstance(el);
+      inst.hide();
     }
-
-
-    const backdrops = document.querySelectorAll(".offcanvas-backdrop");
-    backdrops.forEach((b) => b.remove());
-
-    document.body.classList.remove("offcanvas-backdrop", "show");
-    document.body.style.overflow = "auto";
-
     navigate("/checkout");
   };
 
@@ -57,6 +109,7 @@ export default function Navbar() {
               <li className="nav-item"><Link to="/register" className="nav-link">Regístrate</Link></li>
               <li className="nav-item">
                 <button
+                  ref={toggleBtnRef}
                   className="nav-link active btn border-0 bg-transparent p-0"
                   type="button"
                   data-bs-toggle="offcanvas"
@@ -75,8 +128,10 @@ export default function Navbar() {
 
       {/*Mini Carrito */}
       <div
+        ref={offcanvasRef}
         className="offcanvas offcanvas-end carrito"
         data-bs-backdrop="false"
+        data-bs-scroll="true"      
         tabIndex="-1"
         id="miniCarrito"
       >
