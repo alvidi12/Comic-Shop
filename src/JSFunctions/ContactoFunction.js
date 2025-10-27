@@ -1,5 +1,4 @@
 // ContactoFunction.js
-// NUEVO: Lógica en formato React Hook para usar en Contacto.js correctamente
 
 import { useState } from "react";
 import jsPDF from "jspdf";
@@ -18,7 +17,6 @@ export default function useContactoLogic() {
   const validarFormulario = () => {
     let nuevosErrores = {};
     const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
-    const telefonoRegex = /^\+569\d{8}$/; // Solo si agregas campo teléfono después
 
     if (!form.nombres.trim()) nuevosErrores.nombres = "El nombre es obligatorio";
     if (!form.apellidos.trim()) nuevosErrores.apellidos = "El apellido es obligatorio";
@@ -65,7 +63,7 @@ export default function useContactoLogic() {
   const enviarFormulario = (e) => {
     e.preventDefault();
     if (validarFormulario()) {
-      alert("✅ Envío exitoso. Se generará el PDF.");
+      alert("Envío exitoso. Se generará el PDF.");
       generarPDF();
       setForm({ nombres: "", apellidos: "", correo: "", mensaje: "" }); // limpiar
       setErrores({});

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/AdminUser.css"; // Puedes cambiar el nombre cuando tengas AdminProducts.css
+import "../styles/AdminUser.css";
 
 export default function AdminProducts() {
   const [activeTab, setActiveTab] = useState("registro");
@@ -100,7 +100,7 @@ export default function AdminProducts() {
                 <table className="table table-bordered table-dark mt-4 mb-3">
                   <thead>
                     <tr>
-                      <th>Código</th> {/* ✅ corregido */}
+                      <th>Código</th> 
                       <th>Nombre</th>
                       <th>Acciones</th>
                     </tr>
