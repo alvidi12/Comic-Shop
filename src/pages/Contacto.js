@@ -1,11 +1,9 @@
 // Contacto.js
-// ✅ UI del formulario que utiliza la lógica separada desde ContactoFunction.js
 
 import "../styles/Contacto.css";
-import useContactoLogic from "../JSFunctions/ContactoFunction"; // NUEVO: importamos el hook de lógica
+import useContactoLogic from "../JSFunctions/ContactoFunction";
 
 export default function Contacto() {
-  // NUEVO: extraemos todo desde el hook
   const { form, errores, handleChange, enviarFormulario } = useContactoLogic();
 
   return (
