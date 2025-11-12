@@ -1,28 +1,46 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 import { CarritoContext } from "../context/CarritoContext";
 import "../styles/SalaVenta.css";
 
-export default function SalaVenta({ producto }) {
-  const { agregarAlCarrito } = useContext(CarritoContext); // Importa la función global del carrito
-  const [mostrarAlerta, setMostrarAlerta] = useState(false); // Estado local para mostrar mensaje visual
+export default function SalaVenta() {
+  const { agregarAlCarrito } = useContext(CarritoContext);
+  const location = useLocation();
+  const [producto, setProducto] = useState(null);
+  const [mostrarAlerta, setMostrarAlerta] = useState(false);
+
+  useEffect(() => {
+    if (location.state?.producto) {
+      setProducto(location.state.producto);
+    } else {
+      const raw = localStorage.getItem("productos");
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setProducto(parsed[0]);
+          }
+        } catch {}
+      }
+    }
+  }, [location.state]);
 
   const handleComprar = () => {
+    if (!producto) return;
     agregarAlCarrito({
       id: producto.id,
       nombre: producto.nombre,
       precio: Number(producto.precio),
       imagen: producto.imagen,
     });
-
-    // Mostrar un mensaje temporal "Producto seleccionado"
     setMostrarAlerta(true);
     setTimeout(() => setMostrarAlerta(false), 2000);
   };
 
+  if (!producto) return null;
+
   return (
     <div className="pagina-producto d-flex flex-column min-vh-100">
-      {/* Contenido principal */}
       <main className="flex-grow-1">
         <div className="container my-5">
           <div className="barra-titulo">
@@ -32,63 +50,52 @@ export default function SalaVenta({ producto }) {
             </Link>
           </div>
 
-          <div className="contenido">
-            <div className="grid-tarjetas">
-              <div className="tarjeta">
-                <img src={producto.imagen} alt={producto.nombre} />
+          {/* Estructura original controlada por CSS */}
+          <div className="tarjeta">
+            <img src={producto.imagen} alt={producto.nombre} />
 
-                <div className="tarjeta-texto">
-                  <h3 className="fw-bold">{producto.nombre}</h3>
-                  <h4>
-                    Clasificación:
-                    <span className="item">{producto.clasificacion}</span>
-                  </h4>
-                  <h4>
-                    Nombre alternativo:
-                    <span className="item">{producto.nombreAlternativo}</span>
-                  </h4>
-                  <h4>
-                    Autor(es):<span className="item">{producto.autor}</span>
-                  </h4>
-                  <h4>
-                    Artista(s):<span className="item">{producto.artista}</span>
-                  </h4>
-                  <h4>
-                    Género:<span className="item">{producto.genero}</span>
-                  </h4>
-                  <h4>
-                    Tipo:<span className="item">{producto.tipo}</span>
-                  </h4>
-                  <h4>
-                    Estado:<span className="item">{producto.estado}</span>
-                  </h4>
+            <div className="tarjeta-texto">
+              <h3 className="fw-bold">{producto.nombre}</h3>
+              <h4>
+                Clasificación:<span className="item">{producto.clasificacion}</span>
+              </h4>
+              <h4>
+                Nombre alternativo:<span className="item">{producto.nombreAlternativo}</span>
+              </h4>
+              <h4>
+                Autor(es):<span className="item">{producto.autor}</span>
+              </h4>
+              <h4>
+                Artista(s):<span className="item">{producto.artista}</span>
+              </h4>
+              <h4>
+                Género:<span className="item">{producto.genero}</span>
+              </h4>
+              <h4>
+                Tipo:<span className="item">{producto.tipo}</span>
+              </h4>
+              <h4>
+                Estado:<span className="item">{producto.estado}</span>
+              </h4>
 
-                  <h5>{producto.descripcion}</h5>
+              <h5>{producto.descripcion}</h5>
 
-                  {/* Sección de precio y botón */}
-                  <h2>
-                    {producto.precio.toLocaleString("es-CL")} CLP{" "}
-                    <button
-                      className="btn btn-carrito-agregar"
-                      onClick={handleComprar} //Aquí se ejecuta la función
-                    >
-                      COMPRAR
-                    </button>
-                  </h2>
-                </div>
-              </div>
+              <h2>
+                {Number(producto.precio).toLocaleString("es-CL")} CLP{" "}
+                <button className="btn btn-carrito-agregar" onClick={handleComprar}>
+                  COMPRAR
+                </button>
+              </h2>
             </div>
+          </div>
 
-            {/* Mensaje de alerta */}
-            <div
-              id="mensaje-alerta"
-              className={`alert alert-success text-center ${
-                mostrarAlerta ? "" : "d-none"
-              }`}
-              role="alert"
-            >
-              Producto agregado al carrito
-            </div>
+          {/* Mensaje temporal de confirmación */}
+          <div
+            id="mensaje-alerta"
+            className={`alert alert-success text-center ${mostrarAlerta ? "" : "d-none"}`}
+            role="alert"
+          >
+            Producto agregado al carrito
           </div>
         </div>
       </main>
