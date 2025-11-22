@@ -49,7 +49,7 @@ const Blog = () => {
 
   const handleIrDetalle = (id) => {
     if (!id) return;
-    navigate(`/blog/${id}`);
+    navigate(`/blog/detalle/${id}`);
   };
 
   return (

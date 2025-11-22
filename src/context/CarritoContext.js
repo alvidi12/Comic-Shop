@@ -41,7 +41,7 @@ export const CarritoProvider = ({ children }) => {
   };
 
   const vaciarCarrito = () => {
-    if (window.confirm("¿Vaciar todo el carrito?")) {
+    if (window.confirm("¿Finalizar compra?")) {
       setCarrito([]);
       setTotal(0);
     }

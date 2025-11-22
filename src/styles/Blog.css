@@ -20,7 +20,7 @@
   border-radius: 10px;
   padding: 10px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  color: #cdd3ff;
+  color: #cdd3ff !important;
   margin: 30px auto;
   display: flex;
   flex-direction: column;
