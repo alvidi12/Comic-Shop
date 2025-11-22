@@ -1,10 +1,13 @@
 import { useContext, useState } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 import { jsPDF } from "jspdf";
+import { useNavigate } from "react-router-dom"; // necesario para redirigir tras compra
 import "../styles/Checkout.css";
 
 export default function Checkout() {
-  const { carrito, setCarrito, total, setTotal } = useContext(CarritoContext);
+  const { carrito, setCarrito, total, calcularTotal, vaciarCarrito } = useContext(CarritoContext);
+  const navigate = useNavigate();
+
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [metodo, setMetodo] = useState("Débito");
@@ -18,17 +21,38 @@ export default function Checkout() {
       item.id === id ? { ...item, cantidad: Number(nuevaCantidad) } : item
     );
     setCarrito(actualizado);
-    setTotal(actualizado.reduce((acc, i) => acc + i.precio * i.cantidad, 0));
+    calcularTotal(actualizado);
   };
 
   const eliminarProducto = (id) => {
     if (window.confirm("¿Eliminar este producto del carrito?")) {
       const actualizado = carrito.filter((item) => item.id !== id);
       setCarrito(actualizado);
-      setTotal(actualizado.reduce((acc, i) => acc + i.precio * i.cantidad, 0));
+      calcularTotal(actualizado);
     }
   };
 
+  //Validación y formateo de tarjeta
+  const formatearTarjeta = (valor) => {
+    return valor
+      .replace(/\D/g, "")            // solo números
+      .replace(/(.{4})/g, "$1 ")     // cada 4 dígitos añade espacio
+      .trim()
+      .slice(0, 19);                 // máximo 16 dígitos + 3 espacios
+  };
+
+  const formatearVencimiento = (valor) => {
+    return valor
+      .replace(/\D/g, "") // solo números
+      .replace(/(\d{2})(\d{0,2})/, "$1/$2")
+      .slice(0, 5);
+  };
+
+  const formatearCVV = (valor) => {
+    return valor.replace(/\D/g, "").slice(0, 4); // máximo 4 dígitos
+  };
+
+  // Generación de PDF
   const generarPDF = () => {
     const doc = new jsPDF();
     doc.setFontSize(16);
@@ -55,7 +79,12 @@ export default function Checkout() {
     y += 10;
     doc.setFontSize(14);
     doc.text(`Total: $${total.toLocaleString()}`, 20, y);
+
     doc.save("comprobante_compra.pdf");
+
+    // Vaciar carrito + redirigir al home
+    vaciarCarrito();
+    navigate("/");
   };
 
   if (carrito.length === 0) {
@@ -74,20 +103,37 @@ export default function Checkout() {
         <div className="row">
           {/* --- Columna izquierda --- */}
           <div className="col-md-8">
-            {/* Tabla de productos */}
+
+            {/*MINIATURAS EN TABLA DE PRODUCTOS */}
             <table className="table table-dark table-striped align-middle">
               <thead>
                 <tr>
                   <th>Producto</th>
+                  <th>Imagen</th>
                   <th>Cantidad</th>
                   <th>Subtotal</th>
                   <th></th>
                 </tr>
               </thead>
+
               <tbody>
                 {carrito.map((item) => (
                   <tr key={item.id}>
                     <td>{item.nombre}</td>
+
+                    <td>
+                      <img
+                        src={item.imagen}
+                        alt={item.nombre}
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          objectFit: "cover",
+                          borderRadius: "4px",
+                        }}
+                      />
+                    </td>
+
                     <td>
                       <input
                         type="number"
@@ -100,7 +146,9 @@ export default function Checkout() {
                         style={{ width: "80px" }}
                       />
                     </td>
+
                     <td>${(item.precio * item.cantidad).toLocaleString()}</td>
+
                     <td>
                       <button
                         className="btn btn-sm btn-danger"
@@ -114,7 +162,7 @@ export default function Checkout() {
               </tbody>
             </table>
 
-            {/* Datos de tarjeta*/}
+            {/* Datos de tarjeta */}
             <div className="tarjeta-datos mt-4 p-3 border rounded">
               <h5 className="mb-3">Datos de Tarjeta</h5>
               <div className="row">
@@ -124,28 +172,30 @@ export default function Checkout() {
                     type="text"
                     className="form-control"
                     value={tarjeta}
-                    onChange={(e) => setTarjeta(e.target.value)}
+                    onChange={(e) => setTarjeta(formatearTarjeta(e.target.value))}
                     required
                   />
                 </div>
+
                 <div className="col-md-3 mb-3">
                   <label className="form-label">CVV</label>
                   <input
                     type="text"
                     className="form-control"
-                    maxLength="4"
                     value={cvv}
-                    onChange={(e) => setCvv(e.target.value)}
+                    onChange={(e) => setCvv(formatearCVV(e.target.value))}
                     required
                   />
                 </div>
+
                 <div className="col-md-3 mb-3">
                   <label className="form-label">Vencimiento</label>
                   <input
                     type="text"
                     className="form-control"
                     value={vencimiento}
-                    onChange={(e) => setVencimiento(e.target.value)}
+                    onChange={(e) => setVencimiento(formatearVencimiento(e.target.value))}
+                    placeholder="MM/YY"
                     required
                   />
                 </div>
@@ -153,7 +203,7 @@ export default function Checkout() {
             </div>
           </div>
 
-          {/* --- Columna derecha: Formulario --- */}
+          {/* --- Columna derecha --- */}
           <div className="col-md-4">
             <h4>Datos de compra</h4>
             <form
@@ -172,6 +222,7 @@ export default function Checkout() {
                   required
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Correo electrónico</label>
                 <input
@@ -182,6 +233,7 @@ export default function Checkout() {
                   required
                 />
               </div>
+
               <div className="mb-3">
                 <label className="form-label">Método de pago</label>
                 <select
@@ -203,6 +255,7 @@ export default function Checkout() {
               </button>
             </form>
           </div>
+
         </div>
       </div>
     </div>

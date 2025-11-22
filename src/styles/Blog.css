@@ -1,34 +1,128 @@
-.blog body {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
-    background-size: cover;
+/*componente Blog*/
+.blog {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
 }
 
-.blog .card-personalizada{
-    background-color: #272637d2;
-    border: 2px solid #7e7c9c;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    color: #cdd3ff;
-    margin: 30px auto;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+/* Compatibilidad con el selector anterior */
+.blog body {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Cards personalizadas para el listado */
+.blog .card-personalizada {
+  background-color: #272637d2;
+  border: 2px solid #7e7c9c;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  color: #cdd3ff;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
 .blog .card-personalizada:hover {
-    transform: translateY(-10px) scale(1);
-    box-shadow: 5px 5px 40px rgb(216, 215, 205);
+  transform: translateY(-10px) scale(1);
+  box-shadow: 5px 5px 40px rgb(216, 215, 205);
 }
 
+/* Grid de tarjetas en el listado */
 .blog .grid-card { 
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
 }
 
-.blog .text{
-    font-weight: bold;
-    color: #fcd034;
+/* Texto general del blog (título, etc.) */
+.blog .text {
+  font-weight: bold;
+  color: #fcd034;
+}
+
+/*componente BlogDetalle */
+
+.blogUnico {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url('/public/Imagenes/dcComics.jpg') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/* Cards personalizadas del detalle */
+.blogUnico .cardPersonalizada {
+  background-color: #272637d2;
+  border: 2px solid #7e7c9c;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  color: #cdd3ff;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.blogUnico .cardPersonalizada:hover {
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Si en algún momento usa grid de detalle */
+.blogUnico .gridCard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Contenido interno de la card de detalle */
+.blogUnico .card-lobby {
+  height: 100%;
+}
+
+/* Botones del detalle de blog */
+.blogUnico .btn-blog {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+
+  /* Forzamos colores para que no los pise Bootstrap */
+  background-color: #75619d !important;
+  color: #e4f2ff !important;
+  border: 1px solid #e4f2ff;
+
+  cursor: pointer;
+  text-decoration: none;
+}
+.blogUnico .btn-blog:hover {
+  background-color: #3a2d34 !important;
+  color: #e4f2ff !important;
+}
+
+/* Texto del detalle (mismo color que el listado) */
+.blogUnico .text {
+  font-weight: bold;
+  color: #fcd034;
+}
+/* Botón*/
+.blog .btn-volver-blog {
+  background-color: #fcd034;
+  color: #2f3438;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  margin: 20px auto 0 auto;
+
+}
+.blog .btn-volver-blog:hover {
+  background-color: #ceb457;
+  color: #e4f2ff;
 }

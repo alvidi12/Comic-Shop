@@ -1,8 +1,4 @@
-// RegisterFunction.js
-// Contiene toda la lógica del proceso de registro
-// esta función se encarga de validar los datos del formulario, incluida confirmación de contraseña, y redirigir si el registro es exitoso.
-
-export function registerHandler(form, navigate, setMensaje) {
+export async function registerHandler(form, navigate, setMensaje) {
   const { nombre, apellidos, correo, contrasena, confirmarContrasena } = form;
 
   //  Validar campos vacíos
@@ -19,8 +15,8 @@ export function registerHandler(form, navigate, setMensaje) {
 
   //  Validar dominios permitidos
   const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
-  const dominioValido = dominiosPermitidos.some((dominio) =>
-    correo.endsWith(dominio)
+  const dominioValido = dominiosPermitidos.some((dom) =>
+    correo.endsWith(dom)
   );
 
   if (!dominioValido) {
@@ -30,11 +26,38 @@ export function registerHandler(form, navigate, setMensaje) {
     return;
   }
 
-  //  Simular registro exitoso
-  setMensaje("¡Registro exitoso! Redirigiendo...");
 
-  //  Redirigir con retardo para mostrar el mensaje
-  setTimeout(() => {
-    navigate("/"); // Redirige a la pantalla principal
-  }, 1000);
+  //REGISTRO (MongoDB)
+  try {
+    const respuesta = await fetch("https://comic-shop-backend.onrender.com/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre: `${nombre} ${apellidos}`,
+        email: correo,
+        password: contrasena,
+      }),
+    });
+
+    if (!respuesta.ok) {
+      let errorMsg = "No se pudo completar el registro.";
+      try {
+        const dataError = await respuesta.json();
+        if (dataError.message) errorMsg = dataError.message;
+      } catch {}
+
+      setMensaje(errorMsg);
+      return;
+    }
+
+    // Registro exitoso
+    setMensaje("¡Registro exitoso! Redirigiendo...");
+
+    setTimeout(() => {
+      navigate("/login"); // Ruta correcta: inicia sesión después de registrarse
+    }, 900);
+  } catch (error) {
+    console.error("Error al registrar en el backend:", error);
+    setMensaje("Error al conectar con el servidor. Intenta nuevamente más tarde.");
+  }
 }

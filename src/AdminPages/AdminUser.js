@@ -1,142 +1,59 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate} from "react-router-dom";
+import "../styles/AdminHome.css";
 
-import "../styles/AdminUser.css";
-
-export default function AdminUsers() {
-  const [activeTab, setActiveTab] = useState("registro");
+function AdminHome() {
+  const navigate = useNavigate();
 
   return (
-    <div className="admin">
+    <div className="home">
+  
+      {/*TARJETAS CENTRADAS */}
+      <div className="cards-section mt-5">
+        <div className="cards-container d-flex flex-wrap justify-content-center align-items-center gap-4">
+          {/* TARJETA 1 */}
+          <div
+            className="card card11"
+            onClick={() => navigate("/admin-panel/adminblogs")} // <- ahora lleva al CRUD de blogs
+            role="button"
+            tabIndex={0}
+          >
+            <div className="card-content">
+              <div className="card-title">Blogs</div>
+              <div className="card-description">
+                Crea, modifica y elimina entradas de blog
+              </div>
+            </div>
+          </div>
 
-    <main className="flex-grow-1">
-      <div className="container text-center my-5">
-        <h1 className="titulo fw-bold mb-4">Administración de Usuarios</h1>
-
-        {/* Tabs */}
-        <ul className="nav nav-tabs justify-content-center mb-4">
-          <li className="nav-item">
-            <button
-              className={`nav-link ${activeTab === "registro" ? "active" : ""}`}
-              onClick={() => setActiveTab("registro")}
-            >
-              Registrar
-            </button>
-          </li>
-          <li className="nav-item"> 
-            <button
-              className={`nav-link ${activeTab === "modificar" ? "active" : ""}`}
-              onClick={() => setActiveTab("modificar")}
-            >
-              Modificar
-            </button>
-          </li>
-          <li className="nav-item">
-            <button
-              className={`nav-link ${activeTab === "eliminar" ? "active" : ""}`}
-              onClick={() => setActiveTab("eliminar")}
-            >
-              Eliminar
-            </button>
-          </li>
-        </ul>
-
-        {/* Contenido de tabs */}
-        <div className="card registro p-4 mx-auto col-lg-6">
-          {activeTab === "registro" && (
-            <>
-              <h3 className="mb-3">Registro de Usuario</h3>
-              <form>
-                <input
-                  type="text"
-                  className="form-control mb-4"
-                  placeholder="RUN (12.345.678-9)"
-                />
-                <input
-                  type="text"
-                  className="form-control mb-4"
-                  placeholder="Nombre"
-                />
-                <input
-                  type="text"
-                  className="form-control mb-4"
-                  placeholder="Apellidos"
-                />
-                <input
-                  type="email"
-                  className="form-control mb-4"
-                  placeholder="usuario@personal.cl"
-                />
-                <input
-                  type="text"
-                  className="form-control mb-4"
-                  placeholder="Dirección"
-                />
-                <input
-                  type="text"
-                  className="form-control mb-4"
-                  placeholder="Región"
-                />
-                <button className="btn btn-primary w-100">Guardar</button>
-              </form>
-            </>
-          )}
-
-          {activeTab === "modificar" && (
-            <>
-              <h3 className="mb-4">Modificación de usuarios</h3>
-              <table className="table table-dark table-bordered">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Juan Pérez</td>
-                    <td><button className="btn btn-warning">Editar</button></td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Andy Villarroel</td>
-                    <td><button className="btn btn-warning">Editar</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </>
-          )}
-
-          {activeTab === "eliminar" && (
-            <>
-              <h3 className="mb-4">Eliminar usuarios</h3>
-              <table className="table table-dark table-bordered">
-                <thead>
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Tipo</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Juan Pérez</td>
-                    <td>Vendedor</td>
-                    <td><button className="btn btn-danger">Eliminar</button></td>
-                  </tr>
-                  <tr>
-                    <td>Claudia Carinao</td>
-                    <td>Administrativo</td>
-                    <td><button className="btn btn-danger">Eliminar</button></td>
-                  </tr>
-                </tbody>
-              </table>
-            </>
-          )}
+          {/* TARJETA 2 */}
+          <div
+            className="card card22"
+            onClick={() => navigate("/admin-panel/adminproducts")}
+            role="button"
+            tabIndex={0}
+          >
+            <div className="card-content">
+              <div className="card-title">Productos</div>
+              <div className="card-description">
+                Registra, modifica y elimina productos
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </main>
+
+      {/* Portada */}
+      <section className="tarjeta-portada mt-5 text-center">
+        <div className="portada-container">
+          <div className="info-section">
+            <h2>Se el Admin que todos quieren ser ✨❤️</h2>
+          </div>
+          <img src="/Imagenes/portada.png" alt="portada" />
+        </div>
+      </section>
     </div>
   );
 }
+
+export default AdminHome;

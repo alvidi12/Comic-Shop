@@ -1,52 +1,88 @@
-// Contiene TODA la lógica del login (validaciones, redirecciones)
-// Este archivo maneja la lógica del login de forma desacoplada del componente visual.
-// Usamos funciones compatibles con React y React Router v6.
+export async function loginHandler(correo, contrasena, navigate, setMensaje) {
 
-export function loginHandler(correo, contrasena, navigate, setMensaje) {
-  //Validación de campos vacíos
+  // ======================================================
+  // Validación de campos vacíos (SE MANTIENE)
+  // ======================================================
   if (!correo || !contrasena) {
     setMensaje("Por favor completa todos los campos.");
     return;
   }
 
-  //Credenciales del administrador (login especial)
-  const adminCorreo = "admin1234@admin.cl";
-  const adminContra = "admin1234";
+  // ======================================================
+  //  ❌ SE ELIMINA ADMIN LOCAL (causaba token inválido)
+  //  Ahora todo login (incluyendo admins) pasa por MongoDB.
+  // ======================================================
 
-  //Dominios permitidos para usuarios normales
+  // Dominios permitidos para usuarios normales (SE MANTIENE)
   const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
 
-  //Verificamos si es administrador
-  if (correo === adminCorreo && contrasena === adminContra) {
-    setMensaje("Inicio de sesión como Administrador exitoso. Redirigiendo...");
+  // Si NO es admin, entonces validar dominio
+  const esAdmin = correo.toLowerCase() === "admin1234@admin.cl";
 
-    //Guardamos en localStorage el rol
-    localStorage.setItem("usuarioRol", "admin");
-
-    //Redirigimos al panel exclusivo del administrador
-    setTimeout(() => {
-      navigate("/admin-panel"); //Nueva ruta para AppAdmin
-    }, 1000);
-
-    return;
-  }
-
-  // Valida si el dominio del correo pertenece a uno permitido
-  const tieneDominioValido = dominiosPermitidos.some((dominio) =>
-    correo.endsWith(dominio)
-  );
-
-  if (!tieneDominioValido) {
-    setMensaje(
-      "Correo no válido. Solo se aceptan dominios @duoc.cl, @profesor.duoc.cl o @gmail.com."
+  if (!esAdmin) {
+    const tieneDominioValido = dominiosPermitidos.some((dom) =>
+      correo.endsWith(dom)
     );
-    return;
+
+    if (!tieneDominioValido) {
+      setMensaje(
+        "Correo no válido. Solo se aceptan dominios @duoc.cl, @profesor.duoc.cl o @gmail.com."
+      );
+      return;
+    }
   }
 
-  //Usuario normal
-  setMensaje("¡Inicio de sesión exitoso! Redirigiendo...");
-  localStorage.setItem("usuarioRol", "user"); // Guardamos rol de usuario normal
-  setTimeout(() => {
-    navigate("/"); // Ruta actual del usuario normal
-  }, 1000);
+  // ======================================================
+  //   LOGIN REAL contra el backend en Render
+  // ======================================================
+  try {
+    const respuesta = await fetch("https://comic-shop-backend.onrender.com/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: correo,
+        password: contrasena,
+      }),
+    });
+
+    if (!respuesta.ok) {
+      let errorMsg = "Credenciales inválidas. Verifica correo y contraseña.";
+
+      try {
+        const dataError = await respuesta.json();
+        if (dataError.message) errorMsg = dataError.message;
+      } catch {}
+
+      setMensaje(errorMsg);
+      return;
+    }
+
+    // ======================================================
+    //   LOGIN EXITOSO → Guardamos token válido
+    // ======================================================
+    const data = await respuesta.json(); // { token, user }
+
+    // Guardamos datos del usuario
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("usuarioRol", data.user?.rol || "user");
+    localStorage.setItem("usuarioNombre", data.user?.nombre || "");
+    localStorage.setItem("usuarioCorreo", data.user?.email || correo);
+
+    setMensaje("¡Inicio de sesión exitoso! Redirigiendo...");
+
+    // ======================================================
+    //   Redirección según rol
+    // ======================================================
+    setTimeout(() => {
+      if (data.user?.rol === "admin") {
+        navigate("/admin-panel");
+      } else {
+        navigate("/");
+      }
+    }, 900);
+
+  } catch (error) {
+    console.error("Error al conectarse con el backend:", error);
+    setMensaje("Error al conectar con el servidor. Intenta nuevamente más tarde.");
+  }
 }

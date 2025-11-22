@@ -1,47 +1,29 @@
-// App.js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import "./App.css";
-
 // Componentes compartidos (Usuario)
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
 // Componentes Admin
 import NavbarAdmin from "./components/NavbarAdmin";
-
 // Contexto del carrito
 import { CarritoProvider } from "./context/CarritoContext";
-
 // Páginas públicas
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import SalaVenta from "./pages/SalaVenta";
-import Batgirl from "./pages/Batgirl";
-import Batman from "./pages/Batman";
-import WonderWoman from "./pages/WonderWoman";
-import Superman from "./pages/Superman";
-import PoisonIvy from "./pages/PoisonIvy";
-import BirdsOfPrey from "./pages/BirdsOfPrey";
-import JusticeLeague from "./pages/JusticeLeague";
-import GreenArrow from "./pages/GreenArrow";
 import Blog from "./pages/Blog";
-import { BlogAbsoluteWonderWoman } from "./pages/BlogAbsoluteWonderWoman";
-import { BlogBatgirl } from "./pages/BlogBatgirl";
-import { BlogDcComic } from "./pages/BlogDcComic";
-import { BlogBirdsOfPrey } from "./pages/BlogBirdsOfPrey";
-import { BlogJusticeLeague } from "./pages/BlogJusticeLeague";
-import { BlogJoker } from "./pages/BlogJoker";
 import Nosotros from "./pages/Nosotros";
 import Contacto from "./pages/Contacto";
 import Login from "./pages-user/Login";
 import Register from "./pages-user/Register";
 import Checkout from "./pages/Checkout";
-
 // Páginas Admin
 import AdminHome from "./AdminPages/AdminHome";
-import AdminUser from "./AdminPages/AdminUser";
+// import AdminUser from "./AdminPages/AdminUser"; // Ruta antigua: administración de usuarios (ya no se utiliza)
 import AdminProducts from "./AdminPages/AdminProducts";
+import AdminBlogs from "./AdminPages/AdminBlogs"; // Nuevo: administración de blogs
+import { BlogDetalle } from "./pages/BlogDetalle";
 
 // Layout para usuario (Navbar y Footer normales)
 function PublicLayout() {
@@ -78,22 +60,9 @@ function App() {
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/productos" element={<Productos />} />
-            <Route path="/salaventa" element={<SalaVenta />} />
-            <Route path="/productos/batgirl" element={<Batgirl />} />
-            <Route path="/productos/batman" element={<Batman />} />
-            <Route path="/productos/wonder-woman" element={<WonderWoman />} />
-            <Route path="/productos/superman" element={<Superman />} />
-            <Route path="/productos/poison-ivy" element={<PoisonIvy />} />
-            <Route path="/productos/birds-of-prey" element={<BirdsOfPrey />} />
-            <Route path="/productos/justice-league" element={<JusticeLeague />} />
-            <Route path="/productos/green-arrow" element={<GreenArrow />} />
+            <Route path="/salaventa/:id" element={<SalaVenta />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/aww" element={<BlogAbsoluteWonderWoman />} />
-            <Route path="/blog/batgirl" element={<BlogBatgirl />} />
-            <Route path="/blog/dc-history" element={<BlogDcComic />} />
-            <Route path="/blog/birds-of-prey" element={<BlogBirdsOfPrey />} />
-            <Route path="/blog/liga-justicia" element={<BlogJusticeLeague />} />
-            <Route path="/blog/joker" element={<BlogJoker />} />
+            <Route path="/blog/detalle/:id" element={<BlogDetalle />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/login" element={<Login />} />
@@ -104,7 +73,10 @@ function App() {
           {/*RUTAS ADMINISTRADOR CON SU LAYOUT */}
           <Route path="/admin-panel" element={<AdminLayout />}>
             <Route index element={<AdminHome />} />
-            <Route path="adminuser" element={<AdminUser />} /> {/* Ruta /admin-panel/usuarios */}
+
+            {/* Ruta /admin-panel/adminblogs: administración de blogs (nuevo CRUD) */}
+            <Route path="adminblogs" element={<AdminBlogs />} />
+
             <Route path="adminproducts" element={<AdminProducts />} />
           </Route>
         </Routes>
