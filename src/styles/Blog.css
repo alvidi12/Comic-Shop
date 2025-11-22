@@ -126,3 +126,7 @@
   background-color: #ceb457;
   color: #e4f2ff;
 }
+/* Texto dentro de las cards del blog */
+.blog .text-content {
+  color: #cdd3ff !important;
+}

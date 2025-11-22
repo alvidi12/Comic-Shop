@@ -1,4 +1,3 @@
-// Blog.js
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; 
 import "../styles/Blog.css";
@@ -45,7 +44,6 @@ const Blog = () => {
   const defaultImage =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo_DC_Comics.svg/320px-Logo_DC_Comics.svg.png";
 
-  // 🔥 CORREGIDO → navegación a /blog/detalle/:id
   const handleIrDetalle = (id) => {
     if (!id) return;
     navigate(`/blog/detalle/${id}`);
@@ -75,9 +73,8 @@ const Blog = () => {
                   />
 
                   <div className="card-lobby">
-                    <h5 className="card-title fw-bold">{blog.titulo}</h5>
-
-                    <p className="card-text">{blog.resumen || ""}</p>
+                    <h5 className="card-title fw-bold text">{blog.titulo}</h5>
+                    <p className="text-content">{blog.resumen || ""}</p>
 
                     <div className="d-flex justify-content-end">
                       <button
