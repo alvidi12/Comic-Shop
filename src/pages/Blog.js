@@ -1,14 +1,12 @@
 // Blog.js
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; // <-- agregado
+import { useNavigate } from "react-router-dom"; 
 import "../styles/Blog.css";
 
-// Componente para la página principal del Blog
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
-  const navigate = useNavigate(); // <-- hook de navegación
+  const navigate = useNavigate();
 
-  // Cargar blogs desde backend (MongoDB), manteniendo localStorage como respaldo
   useEffect(() => {
     async function cargarBlogs() {
       try {
@@ -28,14 +26,14 @@ const Blog = () => {
         setBlogs(normalizados);
         localStorage.setItem("blogs", JSON.stringify(normalizados));
       } catch (error) {
-        console.error("Error al cargar blogs desde backend, se usa localStorage:", error);
+        console.error("Error cargando blogs desde backend, usando localStorage:", error);
         const raw = localStorage.getItem("blogs");
         if (raw) {
           try {
             const parsed = JSON.parse(raw);
             if (Array.isArray(parsed)) setBlogs(parsed);
           } catch {
-            console.error("Error al leer blogs desde localStorage (vista pública)");
+            console.error("Error leyendo blogs desde localStorage (vista pública)");
           }
         }
       }
@@ -47,6 +45,7 @@ const Blog = () => {
   const defaultImage =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo_DC_Comics.svg/320px-Logo_DC_Comics.svg.png";
 
+  // 🔥 CORREGIDO → navegación a /blog/detalle/:id
   const handleIrDetalle = (id) => {
     if (!id) return;
     navigate(`/blog/detalle/${id}`);
@@ -67,7 +66,8 @@ const Blog = () => {
             blogs.map((blog) => (
               <div key={blog.id} className="col-md-6 mb-4">
                 <div className="card mb-4 card-personalizada">
-                  {/* Imagen de portada (si no tiene, se usa una por defecto) */}
+                  
+                  {/* Imagen */}
                   <img
                     className="card-img-top"
                     src={blog.imagen || defaultImage}
@@ -77,26 +77,24 @@ const Blog = () => {
                   <div className="card-lobby">
                     <h5 className="card-title fw-bold">{blog.titulo}</h5>
 
-                    {/* Descripción corta para la miniatura.
-                        Si no se ha rellenado, el campo queda vacío visualmente. */}
                     <p className="card-text">{blog.resumen || ""}</p>
 
                     <div className="d-flex justify-content-end">
                       <button
                         className="btn btn-warning btn-ver-mas"
-                        onClick={() => {
-                          handleIrDetalle(blog.id);
-                        }}
+                        onClick={() => handleIrDetalle(blog.id)}
                       >
                         Ver más
                       </button>
                     </div>
+
                   </div>
                 </div>
               </div>
             ))
           )}
         </div>
+
       </div>
     </div>
   );
