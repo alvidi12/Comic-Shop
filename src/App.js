@@ -70,15 +70,25 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
           </Route>
 
-          {/*RUTAS ADMINISTRADOR CON SU LAYOUT */}
+          {/* RUTAS ADMINISTRADOR CON SU LAYOUT */}
           <Route path="/admin-panel" element={<AdminLayout />}>
+            
             <Route index element={<AdminHome />} />
 
-            {/* Ruta /admin-panel/adminblogs: administración de blogs (nuevo CRUD) */}
+            {/* CRUD */}
             <Route path="adminblogs" element={<AdminBlogs />} />
-
             <Route path="adminproducts" element={<AdminProducts />} />
+
+            {/* Versiones tienda dentro del layout admin */}
+            <Route path="productos-tienda" element={<Productos />} />
+            <Route path="productos-tienda/:id" element={<SalaVenta />} />
+
+            <Route path="blog-tienda" element={<Blog />} />
+            <Route path="blog-tienda/detalle/:id" element={<BlogDetalle />} />
+            
+            <Route path="blog-tienda/detalle/:id" element={<BlogDetalle />} />
           </Route>
+
         </Routes>
       </Router>
     </CarritoProvider>

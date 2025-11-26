@@ -6,18 +6,19 @@ import "../styles/SalaVenta.css";
 export default function SalaVenta() {
   const { agregarAlCarrito } = useContext(CarritoContext);
   const location = useLocation();
-  const { id } = useParams(); // 👉 Nuevo: ID desde la URL
+  const { id } = useParams(); 
   const [producto, setProducto] = useState(null);
   const [mostrarAlerta, setMostrarAlerta] = useState(false);
 
+  // Detectar si estamos dentro del panel admin
+  const isAdmin = window.location.pathname.startsWith("/admin-panel");
+
   useEffect(() => {
-    //viene desde Productos con state
     if (location.state?.producto) {
       setProducto(location.state.producto);
       return;
     }
 
-    //cargar desde backend por ID
     async function cargarProductoPorId() {
       try {
         const respuesta = await fetch(`http://localhost:4000/api/products/${id}`);
@@ -25,7 +26,6 @@ export default function SalaVenta() {
         
         const p = await respuesta.json();
 
-        // Normalizar para que coincida con la interfaz actual
         const normalizado = {
           ...p,
           id: p._id,
@@ -40,12 +40,11 @@ export default function SalaVenta() {
         console.error("Error cargando producto por ID:", error);
       }
 
-      // localStorage
       const raw = localStorage.getItem("productos");
       if (raw) {
         try {
           const lista = JSON.parse(raw);
-          const encontrado = lista.find((x) => x.id == id);
+          const encontrado = lista.find((x) => x.id === id);
           if (encontrado) {
             setProducto(encontrado);
           }
@@ -82,7 +81,12 @@ export default function SalaVenta() {
           
           <div className="barra-titulo">
             <h1>{producto.titulo || producto.nombre}</h1>
-            <Link to="/productos" className="btn-retroceder">
+
+            {/* ✔ BOTÓN CORREGIDO: mantiene navbar admin */}
+            <Link
+              to={isAdmin ? "/admin-panel/productos-tienda" : "/productos"}
+              className="btn-retroceder"
+            >
               Retroceder
             </Link>
           </div>
