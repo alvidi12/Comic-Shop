@@ -1,3 +1,4 @@
+/*  PORTADA  */
 .home .portada-container img {
   width: 60%;
   max-width: 500px;
@@ -9,7 +10,6 @@
     text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     text-align: center;
     padding: 0 40px;
-    
 }
 
 .home .portada-container {
@@ -33,6 +33,7 @@
     font-weight: 300;
 }
 
+/*  TEXTO  */
 .home .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
@@ -42,79 +43,147 @@
     font-size: 20px;
 }
 
-.home .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-/* --- TARJETAS --- */
+/*  TARJETAS  */
 .home .card {
     position: relative;
-    width: 350px;           /* tamaño uniforme */
-    height: 200px;;          /* tamaño uniforme */
-    border-radius: 15px;
-    overflow: hidden;
+    width: 350px;
+    height: 500px !important;
+
+    border-radius: 0 !important;
+    overflow: visible !important;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    background: none !important;
+
+    box-shadow: none !important;
+    padding: 0 !important;
 
     display: flex;
-    padding: 20px;
-    color: white;
-    background-size: cover;   /* imagen completa */
+    align-items: flex-end;
+
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: none !important;
 }
 
-.home .card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 5px 5px 40px rgb(255, 233, 66);
-}
-
-/* Contenido de la tarjeta y Título*/
+/* Contenido por encima */
 .home .card-content {
-    color: #ffffff;
-    font-weight: 600; 
+    z-index: 3;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
 }
 
-/* Descripción */
+/*  TITULO + DESCRIPCIÓN */
+.home .card-title {
+    text-align: center;
+    font-weight: 700;
+    color: white;  /* letras negras */
+    position: relative;
+    z-index: 10 !important;
+
+    /* BORDE */
+    -webkit-text-stroke: 0.2px black;   /* grosor del borde + color */
+}
+
 .home .card-description {
+    text-align: center;
+    font-weight: 600;
+    color: black;
+    position: relative;
+    z-index: 10 !important;
     font-size: 0.9rem;
-    color: #f1eeee;
-    text-shadow: 
-        0 2px 4px rgba(0,0,0,0.8),
-        0 4px 8px rgba(0,0,0,0.4);
+
+    /* BORDE */
+    -webkit-text-stroke: 0.2px white;
 }
 
-/* --- TARJETAS INDIVIDUALES --- */
-.home  .card1 {
-    background-image: url('/public/Imagenes/hero-nosotros.jpg');
-}
-.home .card2 {  
-    background-image: url('/public/Imagenes/comicss.jpg');
-}
-.home .card3 {
-    background-image: url('/public/Imagenes/hero-blog.jpg');
-}
-.home .card4 {
-    background-image: url('/public/Imagenes/hero-contacto.jpg');
+/*  IMAGEN + FADE TRANSPARENTE  */
+.home .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    border-radius: 0 !important;
+
+    /* FADE SUPERIOR + FADE INFERIOR */
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,           /* fade arriba completamente oculto */
+        rgba(0,0,0,0.15) 12%,     /* leve opacidad arriba */
+        black 30%,                /* parte visible principal */
+        black 70%,                /* mantiene visibilidad */
+        rgba(0,0,0,0.15) 88%,     /* leve opacidad abajo */
+        transparent 100%          /* fade abajo completamente oculto */
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0,0,0,0.15) 12%,
+        black 30%,
+        black 70%,
+        rgba(0,0,0,0.15) 88%,
+        transparent 100%
+    );
+
+    pointer-events: none;
 }
 
-/* --- MEDIA QUERY PARA MÓVIL --- */
+/*  HOVER DORADO PARA TITULO Y DESCRIPCIÓN  */
+.home .card:hover .card-title,
+.home .card:hover .card-description {
+    text-shadow:
+        0 0 6px rgba(255, 215, 0, 0.9),
+        0 0 10px rgba(255, 215, 0, 0.7),
+        0 0 14px rgba(255, 215, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+
+/*  IMÁGENES  */
+.home .card1::before {
+    background-image: url('https://i.pinimg.com/736x/42/41/5c/42415c1204dc0cab4f7aad0ea8052128.jpg');
+}
+.home .card2::before {
+    background-image: url('https://e1.pxfuel.com/desktop-wallpaper/444/951/desktop-wallpaper-dc-comics-phone.jpg');
+}
+.home .card3::before {
+    background-image: url('https://64.media.tumblr.com/4e58264c9bbff39b2deb77e56c53d949/6bcd7a8f2060d443-15/s1280x1920/b5cda0ba3b4eaada1a8f2515134482b200a0936b.jpg');
+}
+.home .card4::before {
+    background-image: url('https://i.pinimg.com/736x/ef/c4/88/efc4881ea3ed0b75880bf9a7d04b31d7.jpg');
+}
+
+/*  HOVER SOLO DESTELLO SUPERIOR/ESQUINAS  */
+.home .card:hover {
+    box-shadow:
+        0 -20px 40px rgba(255, 233, 66, 0.7),
+        -15px -10px 25px rgba(255, 233, 66, 0.5),
+        15px -10px 25px rgba(255, 233, 66, 0.5);
+
+    z-index: 5;
+}
+
+/*  MEDIA QUERY  */
 @media (max-width: 768px) {
     .cards-container {
-        flex-direction: column;  /* apilar tarjetas verticalmente */
+        flex-direction: column;
         align-items: center;
         gap: 20px;
     }
 
     .card {
-        width: 90%;      /* ocupa casi todo el ancho en móvil */
+        width: 90%;
         max-width: 350px;
-        height: auto;    /* que se ajuste según contenido */
     }
 
     .portada-container img {
-        width: 90%;      /* deja margen lateral en móvil */
-        max-width: none; /* elimina límite si quieres que ocupe casi todo el ancho */
+        width: 90%;
+        max-width: none;
     }
 }
-

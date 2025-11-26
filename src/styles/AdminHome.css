@@ -85,13 +85,12 @@
 }
 
 /* --- TARJETAS INDIVIDUALES --- */
-.home  .card11 {
+.home .card11::before {
     background-image: url('/public/Imagenes/eliminarusuarios.webp');
 }
-.home .card22 {
+.home .card22::before {
     background-image: url('/public/Imagenes/Batmandccomics.jpg');
 }
-
 
 /* --- MEDIA QUERY PARA MÓVIL --- */
 @media (max-width: 768px) {
