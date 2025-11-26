@@ -85,24 +85,6 @@
   height: 100%;
 }
 
-/* Botones del detalle de blog */
-.blogUnico .btn-blog {
-  display: inline-block;
-  padding: 0.5rem 1.2rem;
-  border-radius: 4px;
-
-  /* Forzamos colores para que no los pise Bootstrap */
-  background-color: #75619d !important;
-  color: #e4f2ff !important;
-  border: 1px solid #e4f2ff;
-
-  cursor: pointer;
-  text-decoration: none;
-}
-.blogUnico .btn-blog:hover {
-  background-color: #3a2d34 !important;
-  color: #e4f2ff !important;
-}
 
 /* Texto del detalle (mismo color que el listado) */
 .blogUnico .text {
@@ -110,7 +92,7 @@
   color: #fcd034;
 }
 /* Botón*/
-.blog .btn-volver-blog {
+.blog .btn-volver {
   background-color: #fcd034;
   color: #2f3438;
   border: none;
@@ -122,11 +104,24 @@
   margin: 20px auto 0 auto;
 
 }
-.blog .btn-volver-blog:hover {
+.blog .btn-volver:hover {
   background-color: #ceb457;
   color: #e4f2ff;
 }
-/* Texto dentro de las cards del blog */
-.blog .text-content {
-  color: #cdd3ff !important;
+
+.blogUnico .btn-volver {
+  background-color: #fcd034;
+  color: #2f3438;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  display: block;
+  margin: 20px auto 0 auto;
+
+}
+.blogUnico .btn-volver:hover {
+  background-color: #ceb457;
+  color: #e4f2ff;
 }

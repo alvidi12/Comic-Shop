@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "../styles/Productos.css";
 
 export default function Productos() {
+  const isAdmin = window.location.pathname.startsWith("/admin-panel");
+
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
@@ -95,10 +97,15 @@ export default function Productos() {
                     Compatible con su diseño y lógica actual.
                   */}
                   <Link
-                    to={`/salaventa/${p.id}`}
+                    to={
+                      isAdmin
+                        ? `/admin-panel/productos-tienda/${p.id}`
+                        : `/salaventa/${p.id}`
+                    }
                     state={{ producto: p }}
                     className="tarjeta-link"
                   ></Link>
+
                 </div>
               ))
             ) : (

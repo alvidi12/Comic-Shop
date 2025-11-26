@@ -30,15 +30,30 @@ export default function NavbarAdmin() {
           </button>
 
           <div className="collapse navbar-collapse justify-content-between" id="menuAdmin">
-            {/* Menú central: solo "Inicio" */}
+            {/* Menú central*/}
             <ul className="navbar-nav mx-auto">
+              
               <li className="nav-item">
                 <Link className="nav-link active" to="/admin-panel">
                   Inicio
                 </Link>
-              </li>
-            </ul>
+              </li> 
 
+              <li className="nav-item">
+                <Link className="nav-link active" to="/admin-panel/productos-tienda">
+                  Ver Productos
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link className="nav-link active" to="/admin-panel/blog-tienda">
+              Ver Blogs
+            </Link>
+          </li>
+
+
+            </ul>
+            
             {/* Botón cerrar sesión */}
             <ul className="navbar-nav">
               <li className="nav-item">

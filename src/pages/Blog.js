@@ -6,6 +6,9 @@ const Blog = () => {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
+  // Detectamos si el usuario está dentro del panel admin
+  const isAdmin = window.location.pathname.startsWith("/admin-panel");
+
   useEffect(() => {
     async function cargarBlogs() {
       try {
@@ -44,16 +47,22 @@ const Blog = () => {
   const defaultImage =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo_DC_Comics.svg/320px-Logo_DC_Comics.svg.png";
 
+  // ✔ COMPLETAMENTE CORREGIDO
   const handleIrDetalle = (id) => {
     if (!id) return;
-    navigate(`/blog/detalle/${id}`);
+
+    if (isAdmin) {
+      navigate(`/admin-panel/blog-tienda/detalle/${id}`);
+    } else {
+      navigate(`/blog/detalle/${id}`);
+    }
   };
 
   return (
     <div className="blog d-flex flex-column min-vh-100">
       <div className="container py-5">
-        <h1 className="text-center mb-4 titulo-blog">Blog DC Cómics</h1>
-        <p className="text-center subtitulo-blog mb-5">
+        <h1 className="text-center mb-4 text">Blog DC Cómics</h1>
+        <p className="text-center mb-5 text">
           Explora las últimas noticias, reseñas y artículos del universo de DC.
         </p>
 
@@ -73,8 +82,8 @@ const Blog = () => {
                   />
 
                   <div className="card-lobby">
-                    <h5 className="card-title fw-bold text">{blog.titulo}</h5>
-                    <p className="text-content">{blog.resumen || ""}</p>
+                    <h5 className="titulo-blog-card">{blog.titulo}</h5>
+                    <p className="resumen-blog-card">{blog.resumen || ""}</p>
 
                     <div className="d-flex justify-content-end">
                       <button
