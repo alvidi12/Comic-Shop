@@ -377,14 +377,17 @@ export default function AdminProducts() {
                         </td>
 
                         <td>
-                          <button className="btn btn-sm btn-warning me-2" onClick={() => onEdit(p)}>
-                            Editar
-                          </button>
+                          <div className="acciones-botones">
+                            <button className="btn btn-sm btn-warning" onClick={() => onEdit(p)}>
+                              Editar
+                            </button>
 
-                          <button className="btn btn-sm btn-danger" onClick={() => onDelete(p.id)}>
-                            Eliminar
-                          </button>
+                            <button className="btn btn-sm btn-danger" onClick={() => onDelete(p.id)}>
+                              Eliminar
+                            </button>
+                          </div>
                         </td>
+
                       </tr>
                     ))}
                   </tbody>

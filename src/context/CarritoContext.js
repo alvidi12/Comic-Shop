@@ -51,11 +51,19 @@ export const CarritoProvider = ({ children }) => {
           : item
       );
     } else {
-      nuevoCarrito = [...carrito, { ...producto, cantidad: 1 }];
+      nuevoCarrito = [
+        ...carrito,
+        { 
+          ...producto, 
+          cantidad: 1,
+          link: producto.link ?? "", 
+        }
+      ];
     }
 
     setCarrito(nuevoCarrito);
   };
+
 
   const eliminarDelCarrito = (id) => {
     setCarrito(carrito.filter((item) => item.id !== id));

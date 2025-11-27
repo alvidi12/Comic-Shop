@@ -1,15 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as bootstrap from "bootstrap";
 import "../styles/Components.css";
 
+import { AuthContext } from "../context/AuthContext";
+
 export default function NavbarAdmin() {
   const navigate = useNavigate();
 
+  // 🔥 Sesión REACTIVA (no existía antes)
+  const { usuarioCorreo, logout } = useContext(AuthContext);
+  const [nombreUsuario, setNombreUsuario] = useState("");
+
+  // Actualizar nombre cuando cambia sesión
+  useEffect(() => {
+    setNombreUsuario(localStorage.getItem("usuarioNombre") || "");
+  }, [usuarioCorreo]);
+
+  // NAVBAR collapse original
   const menuRef = useRef(null);
   const navRef = useRef(null);
   const togglerRef = useRef(null);
-
   const collapseRef = useRef(null);
 
   useEffect(() => {
@@ -21,7 +32,7 @@ export default function NavbarAdmin() {
     });
   }, []);
 
-  // CERRAR MENÚ EN CLICK FUERA 
+  // Cerrar al hacer clic fuera (igual que antes)
   useEffect(() => {
     const handler = (evt) => {
       const nav = navRef.current;
@@ -45,27 +56,31 @@ export default function NavbarAdmin() {
     return () => document.removeEventListener("pointerdown", handler);
   }, []);
 
-  // CERRAR MENÚ 
   const closeMenu = () => {
-    const instance = collapseRef.current;
-    if (instance) instance.hide();
+    collapseRef.current?.hide();
   };
 
-  // TOGGLE 
   const toggleMenu = () => {
-    const instance = collapseRef.current;
-    if (!instance) return;
-    instance.toggle();
+    collapseRef.current?.toggle();
   };
 
-  // CERRAR SESIÓN 
+  // 🔥 Cerrar sesión REAL (sin romper estilos ni estructura)
   const cerrarSesion = () => {
+    logout();
+
+    localStorage.removeItem("token");
     localStorage.removeItem("usuarioRol");
+    localStorage.removeItem("usuarioNombre");
+    localStorage.removeItem("usuarioCorreo");
+    
+
+    // avisar al resto de Navbars
+    window.dispatchEvent(new Event("login-change"));
+
     closeMenu();
     navigate("/");
   };
 
-  // RENDER 
   return (
     <div className="navbarComponent">
       <nav ref={navRef} className="navbar navbar-expand-lg navbar-dark">
@@ -116,6 +131,14 @@ export default function NavbarAdmin() {
 
             {/* Cerrar Sesión */}
             <ul className="navbar-nav">
+
+              {/* 🔥 Mostrar nombre del admin como antes */}
+              {usuarioCorreo && (
+                <span className="nav-link text-warning fw-bold me-2">
+                  {nombreUsuario}
+                </span>
+              )}
+
               <li className="nav-item">
                 <span
                   className="nav-link active"
@@ -125,6 +148,7 @@ export default function NavbarAdmin() {
                   Cerrar Sesión
                 </span>
               </li>
+
             </ul>
 
           </div>

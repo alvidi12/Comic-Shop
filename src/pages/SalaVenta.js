@@ -32,6 +32,7 @@ export default function SalaVenta() {
           nombre: p.nombre || p.titulo || "Sin nombre",
           imagen: p.imagen || p.imagenUrl,
           precio: Number(p.precio ?? 0),
+          link: p.link || "",
         };
 
         setProducto(normalizado);
@@ -66,6 +67,7 @@ export default function SalaVenta() {
       nombre: producto.nombre,
       precio: Number(producto.precio),
       imagen: producto.imagen,
+      link: producto.link,
     });
 
     setMostrarAlerta(true);
