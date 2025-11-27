@@ -18,12 +18,24 @@ const Blog = () => {
         }
         const data = await respuesta.json();
 
-        const normalizados = (Array.isArray(data) ? data : []).map((blog) => ({
-          ...blog,
-          id: blog.id || blog._id || "",
-          imagen: blog.imagen || blog.imagenUrl || "",
-          resumen: blog.resumen || blog.descripcionCorta || "",
-        }));
+        const normalizados = (Array.isArray(data) ? data : []).map((blog) => {
+          const resumenDesdeContenido = blog.contenido
+            ? (() => {
+                const textoPlano = blog.contenido.replace(/\n+/g, " ").trim();
+                const corto = textoPlano.slice(0, 180);
+                return textoPlano.length > 180 ? corto + "..." : corto;
+              })()
+            : "";
+
+          return {
+            ...blog,
+            id: blog.id || blog._id || "",
+            imagen: blog.imagen || blog.imagenUrl || "",
+            // ⬇ Si el backend llegara a enviar resumen/descripcionCorta en el futuro, se usan.
+            resumen: blog.resumen || blog.descripcionCorta || resumenDesdeContenido,
+          };
+        });
+
 
         setBlogs(normalizados);
         localStorage.setItem("blogs", JSON.stringify(normalizados));
@@ -47,7 +59,6 @@ const Blog = () => {
   const defaultImage =
     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo_DC_Comics.svg/320px-Logo_DC_Comics.svg.png";
 
-  // ✔ COMPLETAMENTE CORREGIDO
   const handleIrDetalle = (id) => {
     if (!id) return;
 
@@ -71,7 +82,7 @@ const Blog = () => {
             <p className="text-center text-light">No hay entradas de blog aún.</p>
           ) : (
             blogs.map((blog) => (
-              <div key={blog.id} className="col-md-6 mb-4">
+              <div key={blog.id} className="col-md-4 mb-4">
                 <div className="card mb-4 card-personalizada">
                   
                   {/* Imagen */}
@@ -82,25 +93,25 @@ const Blog = () => {
                   />
 
                   <div className="card-lobby">
-                    <h5 className="titulo-blog-card">{blog.titulo}</h5>
-                    <p className="resumen-blog-card">{blog.resumen || ""}</p>
 
-                    <div className="d-flex justify-content-end">
+                      {/* Contenido superior fijo */}
+                      <div className="contenido-superior">
+                          <h5 className="titulo-blog-card">{blog.titulo}</h5>
+                          <p className="resumen-blog-card">{blog.resumen || ""}</p>
+                      </div>
+
+                      {/* Botón abajo siempre */}
                       <button
-                        className="btn btn-warning btn-ver-mas"
-                        onClick={() => handleIrDetalle(blog.id)}
-                      >
-                        Ver más
+                          className="btn btn-warning btn-ver-mas"
+                          onClick={() => handleIrDetalle(blog.id)}
+                      >Ver más
                       </button>
-                    </div>
-
                   </div>
                 </div>
               </div>
             ))
           )}
         </div>
-
       </div>
     </div>
   );

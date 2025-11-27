@@ -1,11 +1,10 @@
-//AdminProductos
 import React, { useEffect, useMemo, useState } from "react";
 import "../styles/AdminUser.css";
 
 export default function AdminProducts() {
   const [activeTab, setActiveTab] = useState("registro");
 
-  // === Producto vacío: se mantiene estructura original ===
+  // Producto vacío: se mantiene estructura original
   const emptyProducto = useMemo(
     () => ({
       id: "",
@@ -29,9 +28,7 @@ export default function AdminProducts() {
   const [productos, setProductos] = useState([]);
   const [editId, setEditId] = useState(null);
 
-  // ===============================================
-  //   CARGAR PRODUCTOS DESDE EL BACKEND (MongoDB)
-  // ===============================================
+  //CARGAR PRODUCTOS DESDE EL BACKEND
   useEffect(() => {
     async function cargarProductos() {
       try {
@@ -72,9 +69,7 @@ export default function AdminProducts() {
     localStorage.setItem("productos", JSON.stringify(productos));
   }, [productos]);
 
-  // ======================
   // Manejo de formularios
-  // ======================
   const onChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -85,9 +80,7 @@ export default function AdminProducts() {
     setEditId(null);
   };
 
-  // ====================================================
-  //  CREAR o EDITAR producto — Conexión REAL al backend
-  // ====================================================
+  //  CREAR o EDITAR producto
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -112,9 +105,8 @@ export default function AdminProducts() {
       let resp;
 
       if (editId != null) {
-        // ==========================
+
         //   EDITAR (PUT)
-        // ==========================
         resp = await fetch(`https://comic-shop-backend.onrender.com/api/products/${editId}`, {
           method: "PUT",
           headers: {
@@ -138,9 +130,8 @@ export default function AdminProducts() {
         setProductos(listaActualizada);
 
       } else {
-        // ==========================
-        //   CREAR (POST) — CORREGIDO ✔
-        // ==========================
+
+        //   CREAR (POST)
         resp = await fetch("https://comic-shop-backend.onrender.com/api/products", {
           method: "POST",
           headers: {
@@ -169,9 +160,7 @@ export default function AdminProducts() {
     }
   };
 
-  // ======================================
-  //   ELIMINAR Producto (DELETE real)
-  // ======================================
+  //   ELIMINAR Producto
   const onDelete = async (id) => {
     if (!window.confirm("¿Eliminar este producto?")) return;
 
@@ -198,9 +187,7 @@ export default function AdminProducts() {
     }
   };
 
-  // ======================
   //  Editar desde tabla
-  // ======================
   const onEdit = (prod) => {
     setEditId(prod.id);
     setForm({ ...prod, precio: String(prod.precio ?? "") });
@@ -243,7 +230,7 @@ export default function AdminProducts() {
               <form onSubmit={onSubmit}>
                 <div className="row g-3">
 
-                  {/* Se mantiene TODO su formulario original tal cual */}
+                  {/*formulario */}
                   <div className="col-md-4">
                     <label className="form-label">Título</label>
                     <input name="titulo" value={form.titulo} onChange={onChange} className="form-control" />
@@ -314,7 +301,7 @@ export default function AdminProducts() {
             </div>
           )}
 
-          {/* === Listado === */}
+          {/*Listado */}
           {activeTab === "listado" && (
             <div className="table-responsive">
               {productos.length === 0 ? (

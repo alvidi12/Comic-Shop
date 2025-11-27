@@ -1,11 +1,47 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
+import { AuthContext } from "./AuthContext";
 
 export const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
+
+  // Usuario REACTIVO (viene del AuthContext)
+  const { usuarioCorreo } = useContext(AuthContext);
+
+  // Clave única del carrito
+  const storageKey = usuarioCorreo ? `carrito_${usuarioCorreo}` : null;
+
+  // Carrito en memoria
   const [carrito, setCarrito] = useState([]);
   const [total, setTotal] = useState(0);
 
+  // Cargar carrito cuando cambia el usuario
+  useEffect(() => {
+    if (storageKey) {
+      const guardado = localStorage.getItem(storageKey);
+      setCarrito(guardado ? JSON.parse(guardado) : []);
+    } else {
+      setCarrito([]); // cerrar sesion con carrito vacío
+    }
+  }, [storageKey]);
+
+  // Guardar carrito en storage del usuario actual
+  useEffect(() => {
+    if (storageKey) {
+      localStorage.setItem(storageKey, JSON.stringify(carrito));
+    }
+  }, [carrito, storageKey]);
+
+  // Calcular total
+  useEffect(() => {
+    const nuevoTotal = carrito.reduce(
+      (acc, item) => acc + item.precio * item.cantidad,
+      0
+    );
+    setTotal(nuevoTotal);
+  }, [carrito]);
+
+  // FUNCIONES DEL CARRITO
   const agregarAlCarrito = (producto) => {
     const existente = carrito.find((item) => item.id === producto.id);
     let nuevoCarrito;
@@ -21,43 +57,28 @@ export const CarritoProvider = ({ children }) => {
     }
 
     setCarrito(nuevoCarrito);
-    calcularTotal(nuevoCarrito);
   };
 
   const eliminarDelCarrito = (id) => {
-    if (window.confirm("¿Eliminar todos los productos de este tipo?")) {
-      const nuevoCarrito = carrito.filter((item) => item.id !== id);
-      setCarrito(nuevoCarrito);
-      calcularTotal(nuevoCarrito);
-    }
-  };
-
-  const calcularTotal = (carritoActualizado) => {
-    const nuevoTotal = carritoActualizado.reduce(
-      (acc, item) => acc + item.precio * item.cantidad,
-      0
-    );
-    setTotal(nuevoTotal);
+    const nuevoCarrito = carrito.filter((item) => item.id !== id);
+    setCarrito(nuevoCarrito);
   };
 
   const vaciarCarrito = () => {
-    if (window.confirm("¿Finalizar compra?")) {
-      setCarrito([]);
-      setTotal(0);
-    }
+    setCarrito([]);
+    if (storageKey) localStorage.removeItem(storageKey);
   };
 
   return (
     <CarritoContext.Provider
       value={{
         carrito,
-        setCarrito,   // se exporta para que Checkout pueda actualizar cantidades
+        setCarrito,
         total,
-        setTotal,  
+        setTotal,
         agregarAlCarrito,
         eliminarDelCarrito,
         vaciarCarrito,
-        calcularTotal, 
       }}
     >
       {children}

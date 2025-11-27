@@ -48,10 +48,10 @@ export async function loginHandler(correo, contrasena, navigate, setMensaje) {
       return;
     }
 
-    //   LOGIN EXITOSO → Guardamos token válido
+    //Guardamos token válido
     const data = await respuesta.json(); // { token, user }
 
-    // Guardamos datos del usuario
+    //Guardamos datos del usuario
     localStorage.setItem("token", data.token);
     localStorage.setItem("usuarioRol", data.user?.rol || "user");
     localStorage.setItem("usuarioNombre", data.user?.nombre || "");
@@ -59,12 +59,12 @@ export async function loginHandler(correo, contrasena, navigate, setMensaje) {
 
     setMensaje("¡Inicio de sesión exitoso! Redirigiendo...");
 
-    //   Redirección según rol
+    // Redirección según rol (FORZAMOS RECARGA COMPLETA DE LA APP)
     setTimeout(() => {
       if (data.user?.rol === "admin") {
-        navigate("/admin-panel");
+        window.location.href = "/admin-panel";
       } else {
-        navigate("/");
+        window.location.href = "/";
       }
     }, 900);
 

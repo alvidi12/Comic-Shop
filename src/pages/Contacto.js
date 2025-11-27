@@ -1,5 +1,3 @@
-// Contacto.js
-
 import "../styles/Contacto.css";
 import useContactoLogic from "../JSFunctions/ContactoFunction";
 

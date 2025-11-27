@@ -64,26 +64,24 @@ export const BlogDetalle = () => {
         <div className="row justify-content-center">
           <div className="col-lg-10">
             
-            {/* USAMOS LA CLASE QUE EXISTE EN EL CSS */}
             <div className="cardPersonalizada">
               
-              {/* Imagen principal */}
-              <img
-                src={blog.imagen}
-                className="card-img-top"
-                alt={blog.titulo}
-                style={{ maxHeight: "400px", objectFit: "contain" }}
-              />
+              <div className="detalle-flex">
 
-              <div className="card-lobby p-4">
-                
-                {/* Título amarillo */}
-                <h1 className="text text-center mb-4">{blog.titulo}</h1>
+                {/* Imagen izquierda */}
+                <div className="detalle-imagen">
+                  <img
+                    src={blog.imagen}
+                    alt={blog.titulo}
+                    className="img-detalle"
+                  />
+                </div>
 
-                {/* Contenido */}
-                <p className="text-content">{blog.contenido}</p>
+                {/* Texto derecha */}
+                <div className="detalle-contenido">
+                  <h1 className="text text-center mb-4">{blog.titulo}</h1>
+                  <p className="text-content">{blog.contenido}</p>
 
-                <div className="d-flex justify-content-end">
                   <button
                     className="btn btn-volver mt-3"
                     onClick={() => navigate(isAdmin ? "/admin-panel/blog-tienda" : "/blog")}
@@ -93,6 +91,7 @@ export const BlogDetalle = () => {
                 </div>
 
               </div>
+
             </div>
           </div>
         </div>

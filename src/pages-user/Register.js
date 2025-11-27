@@ -11,22 +11,21 @@ export default function Register() {
     apellidos: "",
     correo: "",
     contrasena: "",
-    confirmarContrasena: "", // nuevo campo agregado
+    confirmarContrasena: "",
   });
 
   const [mensaje, setMensaje] = useState("");
 
   const navigate = useNavigate(); // necesario para redirigir
 
-  // Comentario original mantenido y mejorado
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
-    setMensaje(""); // limpiamos el mensaje mientras escribe
+    setMensaje("");
   };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // delegamos toda la lógica a RegisterFunction.js
+    //lógica a RegisterFunction.js
     registerHandler(form, navigate, setMensaje);
   };
 

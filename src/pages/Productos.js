@@ -19,7 +19,7 @@ export default function Productos() {
         const normalizados = (Array.isArray(data) ? data : []).map((p) => ({
           ...p,
 
-          // ID real desde MongoDB
+          // ID desde MongoDB
           id: p.id || p._id || "",
 
           // La interfaz usa "nombre" en las tarjetas
@@ -92,10 +92,6 @@ export default function Productos() {
                     ${Number(p.precio).toLocaleString("es-CL")} CLP
                   </p>
 
-                  {/* 
-                    Se envía el producto completo a SalaVenta a través del state.
-                    Compatible con su diseño y lógica actual.
-                  */}
                   <Link
                     to={
                       isAdmin
