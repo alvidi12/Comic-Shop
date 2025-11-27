@@ -5,111 +5,162 @@ import "../styles/Components.css";
 import * as bootstrap from "bootstrap";
 
 export default function Navbar() {
-  const { carrito, total } = useContext(CarritoContext);
+  const { carrito } = useContext(CarritoContext);
   const navigate = useNavigate();
 
-  //controlar offcanvas y el botón que lo abre
-  const offcanvasRef = useRef(null);
-  const toggleBtnRef = useRef(null);
+  // ------------------ SESIÓN con MongoDB ------------------
+  const [sesionIniciada, setSesionIniciada] = useState(false);
 
-  //estados para evitar cierres/aberturas en mitad de animaciones
-  const [isOpen, setIsOpen] = useState(false);
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  //inicializar instancia de Bootstrap y manejar clic fuera de manera robusta
   useEffect(() => {
-    const el = offcanvasRef.current;
-    if (!el) return;
-
-    const instance = bootstrap.Offcanvas.getOrCreateInstance(el);
-
-    const onShow = () => { setIsAnimating(true); };
-    const onShown = () => { setIsAnimating(false); setIsOpen(true); };
-    const onHide = () => { setIsAnimating(true); };
-    const onHidden = () => { setIsAnimating(false); setIsOpen(false); };
-
-    el.addEventListener("show.bs.offcanvas", onShow);
-    el.addEventListener("shown.bs.offcanvas", onShown);
-    el.addEventListener("hide.bs.offcanvas", onHide);
-    el.addEventListener("hidden.bs.offcanvas", onHidden);
-
-    //usar 'pointerdown' mejora la fiabilidad frente a bubbling tardío de 'click'
-    const handlePointerDown = (evt) => {
-      if (!isOpen || isAnimating) return;
-
-      const path = evt.composedPath ? evt.composedPath() : null;
-      const target = evt.target;
-
-      //si el clic fue dentro del offcanvas, no cerramos
-      const clickedInsideOffcanvas =
-        el.contains(target) || (path && path.includes(el));
-      if (clickedInsideOffcanvas) return;
-
-      //si el clic fue en el botón que abre el carrito, no cerramos
-      const toggleEl = toggleBtnRef.current;
-      const clickedToggle =
-        toggleEl &&
-        (toggleEl.contains(target) || (path && path.includes(toggleEl)));
-      if (clickedToggle) return;
-
-      //cierre seguro
-      instance.hide();
-    };
-
-    document.addEventListener("pointerdown", handlePointerDown);
-
-    return () => {
-      el.removeEventListener("show.bs.offcanvas", onShow);
-      el.removeEventListener("shown.bs.offcanvas", onShown);
-      el.removeEventListener("hide.bs.offcanvas", onHide);
-      el.removeEventListener("hidden.bs.offcanvas", onHidden);
-      document.removeEventListener("pointerdown", handlePointerDown);
-    };
-  }, [isOpen, isAnimating]);
-
-  const irACheckout = () => {
-    //cierre controlado antes de navegar
-    const el = offcanvasRef.current;
-    if (el) {
-      const inst = bootstrap.Offcanvas.getInstance(el) || bootstrap.Offcanvas.getOrCreateInstance(el);
-      inst.hide();
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setSesionIniciada(false);
+      return;
     }
-    navigate("/checkout");
+
+    const validarSesion = async () => {
+      try {
+        const res = await fetch("https://TU_BACKEND/api/auth/validate", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (res.ok) {
+          setSesionIniciada(true);
+        } else {
+          localStorage.removeItem("token");
+          setSesionIniciada(false);
+        }
+      } catch (err) {
+        localStorage.removeItem("token");
+        setSesionIniciada(false);
+      }
+    };
+
+    validarSesion();
+  }, []);
+
+  // ------------------ Cerrar Sesión ------------------
+  const cerrarSesion = () => {
+    localStorage.removeItem("token");
+    setSesionIniciada(false);
+    closeMenu();
+    navigate("/");
   };
 
+  // ------------------ REFERENCIAS NAV ------------------
+  const menuRef = useRef(null);
+  const navRef = useRef(null);
+  const togglerRef = useRef(null);
+
+  const [navCollapse, setNavCollapse] = useState(null);
+
+  // ------------------ Inicializar Collapse ------------------
+  useEffect(() => {
+    const menuEl = menuRef.current;
+    if (!menuEl) return;
+
+    const collapse = bootstrap.Collapse.getOrCreateInstance(menuEl, {
+      toggle: false,
+    });
+
+    setNavCollapse(collapse);
+  }, []);
+
+  // ------------------ Cerrar menú al hacer click fuera ------------------
+  useEffect(() => {
+    const handler = (evt) => {
+      const nav = navRef.current;
+      const toggle = togglerRef.current;
+
+      if (!navCollapse) return;
+
+      const insideNav = nav?.contains(evt.target);
+      const isToggle = toggle?.contains(evt.target);
+
+      if (insideNav || isToggle) return;
+
+      if (menuRef.current?.classList.contains("show")) {
+        navCollapse.hide();
+      }
+    };
+
+    document.addEventListener("pointerdown", handler);
+
+    return () => document.removeEventListener("pointerdown", handler);
+  }, [navCollapse]);
+
+  // ------------------ Controles del menú ------------------
+  const closeMenu = () => navCollapse?.hide();
+  const toggleMenu = () => navCollapse?.toggle();
+
+  // ------------------ Carrito ------------------
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
   return (
     <div className="navbarComponent">
-      <nav className="navbar navbar-expand-lg navbar-dark">
+      <nav ref={navRef} className="navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
-          <Link to="/" className="navbar-brand">
+
+          <Link to="/" className="navbar-brand" onClick={closeMenu}>
             <img className="Logo" src="/Imagenes/Logo.png" alt="Logo" width="90" />
           </Link>
 
           <button
+            ref={togglerRef}
             className="navbar-toggler"
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#menu"
+            aria-controls="menu"
+            aria-label="Toggle navigation"
+            onClick={toggleMenu}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse justify-content-between" id="menu">
+          <div ref={menuRef} className="collapse navbar-collapse justify-content-between" id="menu">
+            {/* MENÚ CENTRAL */}
             <ul className="navbar-nav mx-auto">
-              <li className="nav-item"><Link className="nav-link active" to="/nosotros">Nosotros</Link></li>
-              <li className="nav-item"><Link className="nav-link active" to="/productos">Productos</Link></li>
-              <li className="nav-item"><Link className="nav-link active" to="/blog">Blogs</Link></li>
-              <li className="nav-item"><Link className="nav-link active" to="/contacto">Contacto</Link></li>
+              <li className="nav-item"><Link className="nav-link active" to="/nosotros" onClick={closeMenu}>Nosotros</Link></li>
+              <li className="nav-item"><Link className="nav-link active" to="/productos" onClick={closeMenu}>Productos</Link></li>
+              <li className="nav-item"><Link className="nav-link active" to="/blog" onClick={closeMenu}>Blogs</Link></li>
+              <li className="nav-item"><Link className="nav-link active" to="/contacto" onClick={closeMenu}>Contacto</Link></li>
             </ul>
 
+            {/* LADO DERECHO */}
             <ul className="navbar-nav">
-              <li className="nav-item"><Link to="/login" className="nav-link">Inicio Sesión</Link></li>
-              <li className="nav-item"><Link to="/register" className="nav-link">Regístrate</Link></li>
+
+              {/* VISUAL SEGÚN SESIÓN */}
+              {!sesionIniciada && (
+                <>
+                  <li className="nav-item">
+                    <Link to="/login" className="nav-link" onClick={closeMenu}>
+                      Inicio Sesión
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/register" className="nav-link" onClick={closeMenu}>
+                      Regístrate
+                    </Link>
+                  </li>
+                </>
+              )}
+
+              {sesionIniciada && (
+                <li className="nav-item">
+                  <span
+                    className="nav-link active"
+                    style={{ cursor: "pointer" }}
+                    onClick={cerrarSesion}
+                  >
+                    Cerrar Sesión
+                  </span>
+                </li>
+              )}
+
+              {/* ICONO CARRITO */}
               <li className="nav-item">
                 <button
-                  ref={toggleBtnRef}
                   className="nav-link active btn border-0 bg-transparent p-0"
                   type="button"
                   data-bs-toggle="offcanvas"
@@ -125,58 +176,6 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-
-      {/*Mini Carrito */}
-      <div
-        ref={offcanvasRef}
-        className="offcanvas offcanvas-end carrito"
-        data-bs-backdrop="false"
-        data-bs-scroll="true"      
-        tabIndex="-1"
-        id="miniCarrito"
-      >
-        <div className="offcanvas-header">
-          <h5 className="offcanvas-title">Tu Carrito</h5>
-          <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
-        </div>
-
-        <div className="offcanvas-body">
-          {carrito.length === 0 ? (
-            <p className="text-muted">El carrito está vacío</p>
-          ) : (
-            <>
-              <table className="table table-dark table-striped table-sm">
-                <thead>
-                  <tr>
-                    <th>Producto</th>
-                    <th>Cant.</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {carrito.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.nombre}</td>
-                      <td>{item.cantidad}</td>
-                      <td>${(item.precio * item.cantidad).toLocaleString()}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-
-              <div className="text-end fw-bold mb-2">
-                Total: ${total.toLocaleString()}
-              </div>
-
-              <div className="d-grid">
-                <button onClick={irACheckout} className="btn btn-carrito mt-3">
-                  Continuar compra
-                </button>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
     </div>
   );
 }

@@ -111,25 +111,23 @@
     z-index: 1;
     border-radius: 0 !important;
 
-    /* FADE SUPERIOR + FADE INFERIOR */
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,           /* fade arriba completamente oculto */
-        rgba(0,0,0,0.15) 12%,     /* leve opacidad arriba */
-        black 30%,                /* parte visible principal */
-        black 70%,                /* mantiene visibilidad */
-        rgba(0,0,0,0.15) 88%,     /* leve opacidad abajo */
-        transparent 100%          /* fade abajo completamente oculto */
-    );
-    mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(0,0,0,0.15) 12%,
-        black 30%,
-        black 70%,
-        rgba(0,0,0,0.15) 88%,
-        transparent 100%
-    );
+/* FADE SOLO SUPERIOR — SIN FADE INFERIOR */
+-webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,        /* fade arriba completamente oculto */
+    rgba(0,0,0,0.15) 12%,  /* leve opacidad arriba */
+    black 30%,             /* visible desde aquí */
+    black 100%             /* completamente visible abajo */
+);
+
+mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.15) 12%,
+    black 30%,
+    black 100%
+);
+
 
     pointer-events: none;
 }
