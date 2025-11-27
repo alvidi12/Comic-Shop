@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+
 // Importamos la lógica desde JSFunctions
-import { loginHandler } from "../JSFunctions/LoginFunction";
+import { loginHandler } from "../JSFunctions/loginHandler";
 
 export default function Login() {
   // Comentarios originales mantenidos
@@ -13,9 +15,14 @@ export default function Login() {
   // Hook de navegación de React Router v6
   const navigate = useNavigate();
 
+  // OBTENER MÉTODO login() DEL AUTHCONTEXT
+  const { login } = useContext(AuthContext);
+
   const handleLogin = (e) => {
     e.preventDefault();
-    loginHandler(correo, contrasena, navigate, setMensaje);
+
+    // Pasamos login() al loginHandler
+    loginHandler(correo, contrasena, navigate, setMensaje, login);
   };
 
   return (
