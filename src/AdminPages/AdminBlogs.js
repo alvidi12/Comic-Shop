@@ -1,11 +1,10 @@
-//AdminBlogs
 import React, { useEffect, useMemo, useState } from "react";
 import "../styles/AdminUser.css";
 
 export default function AdminBlogs() {
   const [activeTab, setActiveTab] = useState("registro");
 
-  // Estructura base de un blog (formato original mantenido)
+  // Estructura base
   const emptyBlog = useMemo(
     () => ({
       id: "",
@@ -21,9 +20,7 @@ export default function AdminBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [editId, setEditId] = useState(null);
 
-  // ============================================================
-  //   🟦 CARGAR BLOGS DESDE BACKEND (MongoDB)
-  // ============================================================
+  // CARGAR BLOGS
   useEffect(() => {
     async function cargarBlogs() {
       try {
@@ -35,13 +32,25 @@ export default function AdminBlogs() {
         const data = await resp.json();
 
         // Normalizar estructura para el frontend
-        const normalizados = data.map((b) => ({
-          ...b,
-          id: b.id || b._id,
-          resumen: b.resumen || b.descripcionCorta || "",
-          imagen: b.imagenUrl || b.imagen || "",
-          descripcion: b.contenido || b.descripcion || "",
-        }));
+        const normalizados = data.map((b) => {
+          const resumenDesdeContenido = b.resumen || b.descripcionCorta || (
+            b.contenido
+              ? (() => {
+                  const textoPlano = b.contenido.replace(/\n+/g, " ").trim();
+                  const corto = textoPlano.slice(0, 120);
+                  return textoPlano.length > 120 ? corto + "..." : corto;
+                })()
+              : ""
+          );
+
+          return {
+            ...b,
+            id: b.id || b._id,
+            resumen: resumenDesdeContenido,
+            imagen: b.imagenUrl || b.imagen || "",
+            descripcion: b.contenido || b.descripcion || "",
+          };
+        });
 
         setBlogs(normalizados);
         localStorage.setItem("blogs", JSON.stringify(normalizados));
@@ -65,9 +74,7 @@ export default function AdminBlogs() {
     localStorage.setItem("blogs", JSON.stringify(blogs));
   }, [blogs]);
 
-  // ============================================================
   //   FORMULARIO
-  // ============================================================
   const onChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -78,9 +85,7 @@ export default function AdminBlogs() {
     setEditId(null);
   };
 
-  // ============================================================
-  //   🟩 CREAR / EDITAR BLOG — BACKEND REAL
-  // ============================================================
+  //CREAR / EDITAR BLOG
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -106,9 +111,8 @@ export default function AdminBlogs() {
       let resp;
 
       if (editId != null) {
-        // =======================
-        //     EDITAR (PUT)
-        // =======================
+
+        //EDITAR (PUT)
         resp = await fetch(
           `https://comic-shop-backend.onrender.com/api/blogs/${editId}`,
           {
@@ -132,9 +136,8 @@ export default function AdminBlogs() {
           prev.map((b) => (b.id === editId ? actualizado : b))
         );
       } else {
-        // =======================
-        //     CREAR (POST)
-        // =======================
+
+        //CREAR (POST)
         resp = await fetch(
           `https://comic-shop-backend.onrender.com/api/blogs`,
           {
@@ -164,9 +167,7 @@ export default function AdminBlogs() {
     }
   };
 
-  // ============================================================
-  //   🟥 ELIMINAR BLOG
-  // ============================================================
+  //ELIMINAR BLOG
   const onDelete = async (id) => {
     if (!window.confirm("¿Desea eliminar este blog?")) return;
 
@@ -195,9 +196,7 @@ export default function AdminBlogs() {
     }
   };
 
-  // ============================================================
   //   CARGAR EN FORMULARIO
-  // ============================================================
   const onEdit = (blog) => {
     setForm({
       id: blog.id,
@@ -210,9 +209,7 @@ export default function AdminBlogs() {
     setActiveTab("registro");
   };
 
-  // ============================================================
-  //   RENDER ORIGINAL
-  // ============================================================
+  //RENDER
   return (
     <div className="admin">
       <main className="flex-grow-1">

@@ -10,12 +10,11 @@ export default function Login() {
   const [contrasena, setContrasena] = useState("");
   const [mensaje, setMensaje] = useState("");
 
-  // Alfred: Hook de navegación de React Router v6
+  // Hook de navegación de React Router v6
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Alfred: Aquí llamamos a la función lógica
     loginHandler(correo, contrasena, navigate, setMensaje);
   };
 
@@ -32,13 +31,13 @@ export default function Login() {
                   <label className="form-label">Correo Electrónico</label>
                   <input
                     type="email"
-                    id="correo" // Comentario original respetado (si existe referencia previa)
+                    id="correo"
                     className="form-control casillas"
                     placeholder="correo@dominio.cl"
                     value={correo}
                     onChange={(e) => {
                       setCorreo(e.target.value);
-                      setMensaje(""); // Alfred: limpiamos el mensaje cuando el usuario corrige
+                      setMensaje("");
                     }}
                   />
                 </div>
@@ -47,13 +46,13 @@ export default function Login() {
                   <label className="form-label">Contraseña</label>
                   <input
                     type="password"
-                    id="contrasena" // Comentario original respetado
+                    id="contrasena"
                     className="form-control casillas"
                     placeholder="********"
                     value={contrasena}
                     onChange={(e) => {
                       setContrasena(e.target.value);
-                      setMensaje(""); // Alfred: limpiamos el mensaje al cambiar contraseña
+                      setMensaje("");
                     }}
                   />
                 </div>

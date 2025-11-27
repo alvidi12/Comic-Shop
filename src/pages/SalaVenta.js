@@ -82,7 +82,7 @@ export default function SalaVenta() {
           <div className="barra-titulo">
             <h1>{producto.titulo || producto.nombre}</h1>
 
-            {/* ✔ BOTÓN CORREGIDO: mantiene navbar admin */}
+            {/*mantiene navbar admin */}
             <Link
               to={isAdmin ? "/admin-panel/productos-tienda" : "/productos"}
               className="btn-retroceder"
@@ -91,7 +91,6 @@ export default function SalaVenta() {
             </Link>
           </div>
 
-          {/* Mantengo su estructura EXACTA */}
           <div className="tarjeta">
             <img src={producto.imagen} alt={producto.nombre} />
 

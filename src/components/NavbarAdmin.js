@@ -1,4 +1,3 @@
-// NavbarAdmin.js
 import { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as bootstrap from "bootstrap";
@@ -7,14 +6,12 @@ import "../styles/Components.css";
 export default function NavbarAdmin() {
   const navigate = useNavigate();
 
-  // ------------------- REFERENCIAS -------------------
   const menuRef = useRef(null);
   const navRef = useRef(null);
   const togglerRef = useRef(null);
 
   const collapseRef = useRef(null);
 
-  // ------------------- INICIALIZAR COLLAPSE -------------------
   useEffect(() => {
     const menuEl = menuRef.current;
     if (!menuEl) return;
@@ -24,7 +21,7 @@ export default function NavbarAdmin() {
     });
   }, []);
 
-  // ------------------- CERRAR MENÚ EN CLICK FUERA -------------------
+  // CERRAR MENÚ EN CLICK FUERA 
   useEffect(() => {
     const handler = (evt) => {
       const nav = navRef.current;
@@ -48,27 +45,27 @@ export default function NavbarAdmin() {
     return () => document.removeEventListener("pointerdown", handler);
   }, []);
 
-  // ------------------- CERRAR MENÚ -------------------
+  // CERRAR MENÚ 
   const closeMenu = () => {
     const instance = collapseRef.current;
     if (instance) instance.hide();
   };
 
-  // ------------------- TOGGLE -------------------
+  // TOGGLE 
   const toggleMenu = () => {
     const instance = collapseRef.current;
     if (!instance) return;
     instance.toggle();
   };
 
-  // ------------------- CERRAR SESIÓN -------------------
+  // CERRAR SESIÓN 
   const cerrarSesion = () => {
     localStorage.removeItem("usuarioRol");
     closeMenu();
     navigate("/");
   };
 
-  // ------------------- RENDER -------------------
+  // RENDER 
   return (
     <div className="navbarComponent">
       <nav ref={navRef} className="navbar navbar-expand-lg navbar-dark">

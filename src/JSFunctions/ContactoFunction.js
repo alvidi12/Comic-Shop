@@ -1,5 +1,3 @@
-// ContactoFunction.js
-
 import { useState } from "react";
 import jsPDF from "jspdf";
 
