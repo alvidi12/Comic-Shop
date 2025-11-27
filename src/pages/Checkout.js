@@ -57,15 +57,18 @@ export default function Checkout() {
     const doc = new jsPDF();
     doc.setFontSize(16);
     doc.text("Comprobante de Compra", 20, 20);
+
     doc.setFontSize(12);
     doc.text(`Nombre: ${nombre}`, 20, 35);
     doc.text(`Email: ${email}`, 20, 49);
     doc.text(`Método de pago: ${metodo}`, 20, 56);
+
     let y = 70;
     doc.text("Productos:", 20, y);
     y += 10;
 
     carrito.forEach((item) => {
+      // Título del producto
       doc.text(
         `${item.nombre} - Cant: ${item.cantidad} - $${(
           item.precio * item.cantidad
@@ -73,7 +76,26 @@ export default function Checkout() {
         20,
         y
       );
-      y += 8;
+      y += 7;
+
+      // 🔥 NUEVO: imprimir link del producto
+      const linkTexto = item.link ? item.link : "Sin link disponible";
+      doc.setFontSize(10);
+      doc.text(`Link: ${linkTexto}`, 25, y);
+
+      // Si deseas que el link sea clickeable en el PDF:
+      if (item.link) {
+        doc.link(25, y - 3, 180, 10, { url: item.link }); // NUEVO (opcional)
+      }
+
+      doc.setFontSize(12);
+      y += 10;
+
+      // Evitar que el contenido se salga de la página
+      if (y > 270) {
+        doc.addPage();
+        y = 20;
+      }
     });
 
     y += 10;
@@ -86,6 +108,7 @@ export default function Checkout() {
     vaciarCarrito();
     navigate("/");
   };
+
 
   if (carrito.length === 0) {
     return (

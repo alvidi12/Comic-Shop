@@ -1,25 +1,28 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
+
 export const AuthContext = createContext();
+
 export const AuthProvider = ({ children }) => {
 
-  // Estado reactivo de la sesión
-  const [usuarioCorreo, setUsuarioCorreo] = useState(localStorage.getItem("usuarioCorreo"));
+  // Usuario actual REACTIVO
+  const [usuarioCorreo, setUsuarioCorreo] = useState(
+    localStorage.getItem("usuarioCorreo") || null
+  );
 
-  // Escucha cambios en localStorage (login y logout)
-  useEffect(() => {
-    const handler = () => {
-      setUsuarioCorreo(localStorage.getItem("usuarioCorreo"));
-    };
+  // LOGIN: Notifica a React
+  const login = (correo) => {
+    localStorage.setItem("usuarioCorreo", correo);
+    setUsuarioCorreo(correo);
+  };
 
-    window.addEventListener("storage", handler);
-
-    return () => {
-      window.removeEventListener("storage", handler);
-    };
-  }, []);
+  // LOGOUT: Limpia sesión
+  const logout = () => {
+    localStorage.removeItem("usuarioCorreo");
+    setUsuarioCorreo(null);
+  };
 
   return (
-    <AuthContext.Provider value={{ usuarioCorreo, setUsuarioCorreo }}>
+    <AuthContext.Provider value={{ usuarioCorreo, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -20,6 +20,9 @@ export default function AdminProducts() {
       descripcion: "",
       precio: "",
       imagen: "",
+      
+      //  CAMPO  PARA USARSE EN EL PDF
+      link: "",
     }),
     []
   );
@@ -43,6 +46,9 @@ export default function AdminProducts() {
           id: p.id || p._id, // Se usa el virtual id o _id
           imagen: p.imagen || "",
           precio: Number(p.precio ?? 0),
+
+          //Asegurar compatibilidad del nuevo campo
+          link: p.link || "",
         }));
 
         setProductos(normalizados);
@@ -96,6 +102,9 @@ export default function AdminProducts() {
       imagen:
         form.imagen?.trim() ||
         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/800px-No-Image-Placeholder.svg.png",
+
+      // LINK AL BODY
+      link: form.link?.trim() || "",
     };
 
     // TOKEN obligatorio
@@ -220,7 +229,7 @@ export default function AdminProducts() {
             </li>
           </ul>
 
-          {/* === Registro / Edición === */}
+          {/*  Registro / Edición  */}
           {activeTab === "registro" && (
             <div className="card p-4 mx-auto col-lg-8">
               <h3 className="mb-3">
@@ -286,6 +295,18 @@ export default function AdminProducts() {
                     <label className="form-label">URL Imagen</label>
                     <input name="imagen" value={form.imagen} onChange={onChange} className="form-control" />
                   </div>
+
+                  {/* CAMPO VISUAL PARA EL LINK DEL PDF */}
+                  <div className="col-12">
+                    <label className="form-label">URL / Link para PDF</label>
+                    <input
+                      name="link"
+                      value={form.link}
+                      onChange={onChange}
+                      className="form-control"
+                      placeholder="https://ejemplo.com/info.pdf"
+                    />
+                  </div>
                 </div>
 
                 <div className="mt-3 d-flex gap-2">
@@ -318,6 +339,10 @@ export default function AdminProducts() {
                       <th>Género</th>
                       <th>Estado</th>
                       <th>Precio</th>
+
+                      {/* columna para LINK */}
+                      <th>Link</th>
+
                       <th>Acciones</th>
                     </tr>
                   </thead>
@@ -339,6 +364,17 @@ export default function AdminProducts() {
                         <td>{p.genero}</td>
                         <td>{p.estado}</td>
                         <td>${Number(p.precio).toLocaleString("es-CL")}</td>
+
+                        {/*Mostrar el link y permitir abrirlo */}
+                        <td>
+                          {p.link ? (
+                            <a href={p.link} target="_blank" rel="noopener noreferrer">
+                              Ver link
+                            </a>
+                          ) : (
+                            <span className="text-muted">—</span>
+                          )}
+                        </td>
 
                         <td>
                           <button className="btn btn-sm btn-warning me-2" onClick={() => onEdit(p)}>

@@ -5,27 +5,25 @@ export const CarritoContext = createContext();
 
 export const CarritoProvider = ({ children }) => {
 
-  // Usuario REACTIVO (viene del AuthContext)
   const { usuarioCorreo } = useContext(AuthContext);
 
-  // Clave única del carrito
+  // Key única del usuario actual
   const storageKey = usuarioCorreo ? `carrito_${usuarioCorreo}` : null;
 
-  // Carrito en memoria
   const [carrito, setCarrito] = useState([]);
   const [total, setTotal] = useState(0);
 
-  // Cargar carrito cuando cambia el usuario
+  // Cargar carrito cuando CAMBIA el usuario
   useEffect(() => {
     if (storageKey) {
       const guardado = localStorage.getItem(storageKey);
       setCarrito(guardado ? JSON.parse(guardado) : []);
     } else {
-      setCarrito([]); // cerrar sesion con carrito vacío
+      setCarrito([]); // sesión cerrada
     }
   }, [storageKey]);
 
-  // Guardar carrito en storage del usuario actual
+  // Guardar carrito por usuario
   useEffect(() => {
     if (storageKey) {
       localStorage.setItem(storageKey, JSON.stringify(carrito));
@@ -41,11 +39,11 @@ export const CarritoProvider = ({ children }) => {
     setTotal(nuevoTotal);
   }, [carrito]);
 
-  // FUNCIONES DEL CARRITO
+  //  FUNCIONES 
   const agregarAlCarrito = (producto) => {
     const existente = carrito.find((item) => item.id === producto.id);
-    let nuevoCarrito;
 
+    let nuevoCarrito;
     if (existente) {
       nuevoCarrito = carrito.map((item) =>
         item.id === producto.id
@@ -60,8 +58,7 @@ export const CarritoProvider = ({ children }) => {
   };
 
   const eliminarDelCarrito = (id) => {
-    const nuevoCarrito = carrito.filter((item) => item.id !== id);
-    setCarrito(nuevoCarrito);
+    setCarrito(carrito.filter((item) => item.id !== id));
   };
 
   const vaciarCarrito = () => {
@@ -73,12 +70,12 @@ export const CarritoProvider = ({ children }) => {
     <CarritoContext.Provider
       value={{
         carrito,
-        setCarrito,
         total,
-        setTotal,
         agregarAlCarrito,
         eliminarDelCarrito,
         vaciarCarrito,
+        setCarrito,
+        setTotal,
       }}
     >
       {children}

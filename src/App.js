@@ -2,10 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import "./App.css";
 
+// Componentes compartidos
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NavbarAdmin from "./components/NavbarAdmin";
 
+// Contextos
 import { AuthProvider } from "./context/AuthContext";
 import { CarritoProvider } from "./context/CarritoContext";
 
@@ -20,12 +22,13 @@ import Login from "./pages-user/Login";
 import Register from "./pages-user/Register";
 import Checkout from "./pages/Checkout";
 
-// Admin
+// Páginas Admin
 import AdminHome from "./AdminPages/AdminHome";
 import AdminProducts from "./AdminPages/AdminProducts";
 import AdminBlogs from "./AdminPages/AdminBlogs";
 import { BlogDetalle } from "./pages/BlogDetalle";
 
+// Layout público
 function PublicLayout() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -38,6 +41,7 @@ function PublicLayout() {
   );
 }
 
+// Layout admin
 function AdminLayout() {
   return (
     <div className="d-flex flex-column min-vh-100">
@@ -50,14 +54,17 @@ function AdminLayout() {
   );
 }
 
-function App() {
+export default function App() {
+
+  const usuarioKey = localStorage.getItem("usuarioCorreo") || "anon";
+
   return (
     <AuthProvider>
-      <CarritoProvider>
+      <CarritoProvider key={usuarioKey}>
         <Router>
           <Routes>
 
-            {/* Público */}
+            {/* RUTAS PÚBLICAS */}
             <Route element={<PublicLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/productos" element={<Productos />} />
@@ -71,7 +78,7 @@ function App() {
               <Route path="/checkout" element={<Checkout />} />
             </Route>
 
-            {/* Admin */}
+            {/* RUTAS ADMIN */}
             <Route path="/admin-panel" element={<AdminLayout />}>
               <Route index element={<AdminHome />} />
               <Route path="adminblogs" element={<AdminBlogs />} />
@@ -88,5 +95,3 @@ function App() {
     </AuthProvider>
   );
 }
-
-export default App;
