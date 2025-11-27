@@ -45,3 +45,11 @@
 .admin .nav-link:not(.active) {
   color: #ffdddd;
 }
+
+/*Contenedor interno para separar botones sin romper la tabla */
+.acciones-botones {
+  display: flex;
+  gap: 10px; /* separa editar / eliminar */
+  justify-content: center; 
+  align-items: center;
+}
