@@ -20,33 +20,32 @@ import Register from "./pages-user/Register";
 import Checkout from "./pages/Checkout";
 // Páginas Admin
 import AdminHome from "./AdminPages/AdminHome";
-// import AdminUser from "./AdminPages/AdminUser"; // Ruta antigua: administración de usuarios (ya no se utiliza)
 import AdminProducts from "./AdminPages/AdminProducts";
-import AdminBlogs from "./AdminPages/AdminBlogs"; // Nuevo: administración de blogs
+import AdminBlogs from "./AdminPages/AdminBlogs";
 import { BlogDetalle } from "./pages/BlogDetalle";
 
-// Layout para usuario (Navbar y Footer normales)
+// Layout para usuario
 function PublicLayout() {
   return (
     <div className="d-flex flex-column min-vh-100">
-      <Navbar /> {/* Barra de navegación de usuario */}
+      <Navbar />
       <div className="flex-grow-1">
-        <Outlet /> {/* Aquí se renderizan las páginas */}
+        <Outlet />
       </div>
-      <Footer /> {/* Pie de página de usuario */}
+      <Footer />
     </div>
   );
 }
 
-// Layout para administrador (estructura diferente)
+// Layout para admin
 function AdminLayout() {
   return (
     <div className="d-flex flex-column min-vh-100">
-      <NavbarAdmin /> {/* Barra de navegación de administrador */}
+      <NavbarAdmin />
       <div className="flex-grow-1">
-        <Outlet /> {/* Render de páginas admin */}
+        <Outlet />
       </div>
-      <Footer /> {/*Puede dejarse o eliminarse según su preferencia */}
+      <Footer />
     </div>
   );
 }
@@ -56,7 +55,8 @@ function App() {
     <CarritoProvider>
       <Router>
         <Routes>
-          {/* RUTAS DE USUARIO CON SU LAYOUT */}
+
+          {/* Rutas Publicas */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/productos" element={<Productos />} />
@@ -70,22 +70,14 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
           </Route>
 
-          {/* RUTAS ADMINISTRADOR CON SU LAYOUT */}
+          {/* Rutas Admin */}
           <Route path="/admin-panel" element={<AdminLayout />}>
-            
             <Route index element={<AdminHome />} />
-
-            {/* CRUD */}
             <Route path="adminblogs" element={<AdminBlogs />} />
             <Route path="adminproducts" element={<AdminProducts />} />
-
-            {/* Versiones tienda dentro del layout admin */}
             <Route path="productos-tienda" element={<Productos />} />
             <Route path="productos-tienda/:id" element={<SalaVenta />} />
-
             <Route path="blog-tienda" element={<Blog />} />
-            <Route path="blog-tienda/detalle/:id" element={<BlogDetalle />} />
-            
             <Route path="blog-tienda/detalle/:id" element={<BlogDetalle />} />
           </Route>
 

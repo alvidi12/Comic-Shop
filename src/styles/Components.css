@@ -91,3 +91,29 @@ body {
 .navbarComponent #miniCarrito .btn-close:hover {
   transform: scale(1.1);
 }
+
+@media (max-width: 991px) {
+
+  /* Ocultar nombre de escritorio en móviles */
+  .navbarComponent .nombre-escritorio {
+    display: none !important;
+  }
+
+  /* Mostrar nombre debajo del carrito */
+  .navbarComponent .nombre-usuario-responsive {
+    display: block !important;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+    font-weight: 600;
+    color: #fcd034;
+    font-size: 1rem;
+  }
+
+  /* Ajustar contenedor del carrito */
+  .navbarComponent .cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

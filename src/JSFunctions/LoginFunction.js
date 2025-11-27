@@ -1,17 +1,10 @@
 export async function loginHandler(correo, contrasena, navigate, setMensaje) {
 
-  // ======================================================
   // Validación de campos vacíos (SE MANTIENE)
-  // ======================================================
   if (!correo || !contrasena) {
     setMensaje("Por favor completa todos los campos.");
     return;
   }
-
-  // ======================================================
-  //  ❌ SE ELIMINA ADMIN LOCAL (causaba token inválido)
-  //  Ahora todo login (incluyendo admins) pasa por MongoDB.
-  // ======================================================
 
   // Dominios permitidos para usuarios normales (SE MANTIENE)
   const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
@@ -32,9 +25,7 @@ export async function loginHandler(correo, contrasena, navigate, setMensaje) {
     }
   }
 
-  // ======================================================
   //   LOGIN REAL contra el backend en Render
-  // ======================================================
   try {
     const respuesta = await fetch("https://comic-shop-backend.onrender.com/api/auth/login", {
       method: "POST",
@@ -57,9 +48,7 @@ export async function loginHandler(correo, contrasena, navigate, setMensaje) {
       return;
     }
 
-    // ======================================================
     //   LOGIN EXITOSO → Guardamos token válido
-    // ======================================================
     const data = await respuesta.json(); // { token, user }
 
     // Guardamos datos del usuario
@@ -70,9 +59,7 @@ export async function loginHandler(correo, contrasena, navigate, setMensaje) {
 
     setMensaje("¡Inicio de sesión exitoso! Redirigiendo...");
 
-    // ======================================================
     //   Redirección según rol
-    // ======================================================
     setTimeout(() => {
       if (data.user?.rol === "admin") {
         navigate("/admin-panel");

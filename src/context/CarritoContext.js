@@ -57,6 +57,7 @@ export const CarritoProvider = ({ children }) => {
         agregarAlCarrito,
         eliminarDelCarrito,
         vaciarCarrito,
+        calcularTotal, 
       }}
     >
       {children}
