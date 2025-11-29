@@ -54,7 +54,7 @@ export async function registerHandler(form, navigate, setMensaje) {
     setMensaje("¡Registro exitoso! Redirigiendo...");
 
     setTimeout(() => {
-      navigate("/login"); // Ruta correcta: inicia sesión después de registrarse
+      navigate("/"); // Ruta correcta: inicia sesión después de registrarse
     }, 900);
   } catch (error) {
     console.error("Error al registrar en el backend:", error);
