@@ -104,7 +104,7 @@ GET /api/productos
 POST /api/productos 
 PUT /api/productos/:id
 DELETE /api/productos/:id
-POST /api/auth/register
+POST /api/auth/login para contraseña incorrecta
 POST /api/auth/login
 
 ## ✔ Manejo de Errores
