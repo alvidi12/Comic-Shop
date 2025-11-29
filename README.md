@@ -87,30 +87,25 @@ La Base de Datos se realizo con MongoDB Atlas, el cual nos permitio crear un clu
 - Documentación: Swagger
 
 
-## ✔ Endpoints para la autentificación
+## ✔ Endpoints de Comic Shop
+GET BLOGS https://comic-shop-backend.onrender.com/api/blogs
+GET PRODUCTOSS https://comic-shop-backend.onrender.com/api/products
+
+## ✔ Endpoints de testeo
+
+EJECUCION PARA SWAGGER UI: npm run dev
+
+##  Backend
+BACKEND http://localhost:4000/
+##  Swagger
+ http://localhost:4000/api-docs
+
+GET /api/productos
+POST /api/productos 
+PUT /api/productos/:id
+DELETE /api/productos/:id
 POST /api/auth/register
 POST /api/auth/login
-
-## ✔ Endpoints para Productos
-GET /api/productos
-GET /api/productos/:id
-POST /api/productos   (admin)
-PUT /api/productos/:id  (admin)
-DELETE /api/productos/:id (admin)
-
-## ✔ Swagger
-Disponible en /api-docs
-
-
-## 📮Ejemplos
-Login:
-fetch('/api/auth/login', {...})
-
-GET Productos:
-fetch('/api/productos')
-
-POST Producto (admin):
-fetch('/api/productos', { headers: { Authorization: Bearer <token> }})
 
 ## ✔ Manejo de Errores
 El frontend debe manejar 401, 403 y 500 con avisos adecuados.
