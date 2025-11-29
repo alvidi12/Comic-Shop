@@ -83,7 +83,10 @@ const Blog = () => {
           ) : (
             blogs.map((blog) => (
               <div key={blog.id} className="col-md-4 mb-4">
-                <div className="card mb-4 card-personalizada">
+                <div className="card mb-4 card-personalizada" 
+                onClick={() => handleIrDetalle(blog.id)}   //Tarjeta clickeable
+                role="button"
+                tabIndex={0}>
                   
                   {/* Imagen */}
                   <img
@@ -102,9 +105,13 @@ const Blog = () => {
 
                       {/* Botón abajo siempre */}
                       <button
-                          className="btn btn-warning btn-ver-mas"
-                          onClick={() => handleIrDetalle(blog.id)}
-                      >Ver más
+                        className="btn btn-warning btn-ver-mas"
+                        onClick={(e) => {
+                          e.stopPropagation();       // ✔ EVITA doble navegación
+                          handleIrDetalle(blog.id);
+                        }}
+                      >
+                        Ver más
                       </button>
                   </div>
                 </div>
